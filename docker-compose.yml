@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  db:
+    container_name: db_${PROJECT_SLUG}
+    image: mysql
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=${PROJECT_SLUG}
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=dev
+    volumes:
+      - db-data:/var/lib/mysql
+
+  phpmyadmin:
+    container_name: phpmyadmin_${PROJECT_SLUG}
+    image: phpmyadmin
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=dev
+      - PMA_PASSWORD=dev
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+  web:
+    container_name: web_${PROJECT_SLUG}
+    build: ./docker/php
+    volumes:
+      - .:/var/www
+      - ./docker/vhosts:/etc/apache2/sites-enabled
+      - ./docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    ports:
+      - "8800:80"
+      - "4443:443"
+    depends_on:
+      - db
+
+  maildev:
+    image: maildev/maildev
+    container_name: maildev_${PROJECT_SLUG}
+    command: bin/maildev --smtp 25 --hide-extensions STARTTLS
+
+volumes:
+  db-data:
