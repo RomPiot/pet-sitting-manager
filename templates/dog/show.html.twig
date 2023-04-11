@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dog{% endblock %}
+
+{% block body %}
+    <h1>Dog</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ dog.name }}</td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>{{ dog.color }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{{ dog.birthday ? dog.birthday|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Breed</th>
+                <td>{{ dog.breed }}</td>
+            </tr>
+            <tr>
+                <th>Food</th>
+                <td>{{ dog.food }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('dog_list') }}">back to list</a>
+
+    <a href="{{ path('dog_edit', {'id': dog.id}) }}">edit</a>
+{% endblock %}
