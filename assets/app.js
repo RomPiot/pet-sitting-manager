@@ -11,5 +11,3 @@ import FullCalendar from "./scripts/full_calendar";
 // import {Datepicker} from 'vanillajs-datepicker';
 
 FullCalendar();
-// start the Stimulus application
-import './bootstrap';

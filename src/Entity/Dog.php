@@ -18,7 +18,7 @@ class Dog
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $color = null;
+    private ?string $backgroundColor = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?DateTime $birthday = null;
@@ -38,9 +38,17 @@ class Dog
     #[ORM\ManyToOne(inversedBy: 'dogs')]
     private ?Owner $owner = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $textColor = null;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -48,14 +56,14 @@ class Dog
         return $this->id;
     }
 
-    public function getColor(): ?string
+    public function getBackgroundColor(): ?string
     {
-        return $this->color;
+        return $this->backgroundColor;
     }
 
-    public function setColor(?string $color): self
+    public function setBackgroundColor(?string $backgroundColor): self
     {
-        $this->color = $color;
+        $this->backgroundColor = $backgroundColor;
 
         return $this;
     }
@@ -143,6 +151,18 @@ class Dog
     public function setOwner(?Owner $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getTextColor(): ?string
+    {
+        return $this->textColor;
+    }
+
+    public function setTextColor(string $textColor): self
+    {
+        $this->textColor = $textColor;
 
         return $this;
     }

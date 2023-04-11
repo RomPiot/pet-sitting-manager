@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\BookingRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -17,10 +18,10 @@ class Booking
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $dateStart = null;
+    private ?DateTime $dateStart = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $dateEnd = null;
+    private ?DateTime $dateEnd = null;
 
     #[ORM\ManyToMany(targetEntity: Dog::class, inversedBy: 'bookings')]
     private Collection $dogs;
@@ -35,7 +36,10 @@ class Booking
     private ?string $comment = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $color = null;
+    private ?string $backgroundColor = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $textColor = null;
 
     public function __construct()
     {
@@ -47,24 +51,24 @@ class Booking
         return $this->id;
     }
 
-    public function getDateStart(): ?\DateTimeImmutable
+    public function getDateStart(): ?DateTime
     {
         return $this->dateStart;
     }
 
-    public function setDateStart(\DateTimeImmutable $dateStart): self
+    public function setDateStart(DateTime $dateStart): self
     {
         $this->dateStart = $dateStart;
 
         return $this;
     }
 
-    public function getDateEnd(): ?\DateTimeImmutable
+    public function getDateEnd(): ?DateTime
     {
         return $this->dateEnd;
     }
 
-    public function setDateEnd(\DateTimeImmutable $dateEnd): self
+    public function setDateEnd(DateTime $dateEnd): self
     {
         $this->dateEnd = $dateEnd;
 
@@ -131,14 +135,26 @@ class Booking
         return $this;
     }
 
-    public function getColor(): ?string
+    public function getBackgroundColor(): ?string
     {
-        return $this->color;
+        return $this->backgroundColor;
     }
 
-    public function setColor(?string $color): self
+    public function setBackgroundColor(?string $backgroundColor): self
     {
-        $this->color = $color;
+        $this->backgroundColor = $backgroundColor;
+
+        return $this;
+    }
+
+    public function getTextColor(): ?string
+    {
+        return $this->textColor;
+    }
+
+    public function setTextColor(?string $textColor): self
+    {
+        $this->textColor = $textColor;
 
         return $this;
     }

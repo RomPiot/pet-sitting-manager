@@ -33,18 +33,26 @@ class Owner
         $this->dogs = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
+
+    public
+    function getId(): ?int
     {
         return $this->id;
     }
 
 
-    public function getContacts(): ?array
+    public
+    function getContacts(): ?array
     {
         return $this->contacts;
     }
 
-    public function setContacts(?array $contacts): self
+    public
+    function setContacts(?array $contacts): self
     {
         $this->contacts = $contacts;
 
@@ -52,24 +60,28 @@ class Owner
     }
 
 
-    public function getAddress(): ?string
+    public
+    function getAddress(): ?string
     {
         return $this->address;
     }
 
-    public function setAddress(?string $address): self
+    public
+    function setAddress(?string $address): self
     {
         $this->address = $address;
 
         return $this;
     }
 
-    public function getName(): ?string
+    public
+    function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public
+    function setName(string $name): self
     {
         $this->name = $name;
 
@@ -79,12 +91,14 @@ class Owner
     /**
      * @return Collection<int, Dog>
      */
-    public function getDogs(): Collection
+    public
+    function getDogs(): Collection
     {
         return $this->dogs;
     }
 
-    public function addDog(Dog $dog): self
+    public
+    function addDog(Dog $dog): self
     {
         if (!$this->dogs->contains($dog)) {
             $this->dogs->add($dog);
@@ -94,7 +108,8 @@ class Owner
         return $this;
     }
 
-    public function removeDog(Dog $dog): self
+    public
+    function removeDog(Dog $dog): self
     {
         if ($this->dogs->removeElement($dog)) {
             // set the owning side to null (unless already changed)

@@ -9,7 +9,8 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Color</th>
+                <th>Background color</th>
+                <th>Text color</th>
                 <th>Birthday</th>
                 <th>actions</th>
             </tr>
@@ -18,7 +19,8 @@
         {% for dog in dogs %}
             <tr>
                 <td>{{ dog.name }}</td>
-                <td>{{ dog.color }}</td>
+                <td>{{ dog.backgroundColor }}</td>
+                <td>{{ dog.textColor }}</td>
                 <td>{{ dog.birthday ? dog.birthday|date('Y-m-d') : '' }}</td>
                 <td>
                     <a href="{{ path('dog_show', {'id': dog.id}) }}">show</a>

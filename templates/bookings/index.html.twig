@@ -3,5 +3,5 @@
 {% block title %}Bookings{% endblock %}
 
 {% block body %}
-    <div class="full-calendar"></div>
+    <div class="full-calendar" data-bookings="{{ bookingsSerialized|json_encode() }}"></div>
 {% endblock %}

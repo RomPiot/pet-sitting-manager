@@ -17,7 +17,8 @@ class DogType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('color', ColorType::class)
+            ->add('backgroundColor', ColorType::class)
+            ->add('textColor', ColorType::class)
             ->add('Owner', TextType::class, [
                 'required' => false,
             ])
@@ -30,7 +31,10 @@ class DogType extends AbstractType
             ])
             ->add('food', TextareaType::class, [
                 'required' => false,
-            ]);
+            ])
+            ->add('owner')
+        ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

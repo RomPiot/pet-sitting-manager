@@ -8,13 +8,14 @@ export default function () {
     document.addEventListener('DOMContentLoaded', function () {
         const calendarEl = document.querySelector('.full-calendar');
         if (calendarEl) {
+            const bookings = JSON.parse(calendarEl.dataset.bookings);
             const calendar = new Calendar(calendarEl, {
                 plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
                 selectable: true,
                 initialView: 'dayGridMonth',
                 themeSystem: 'bootstrap',
                 editable: true,
-                events: {},
+                events: bookings,
                 buttonText: {
                     prev: 'Previous',
                     next: 'Next'
