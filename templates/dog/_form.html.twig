@@ -1,4 +1,7 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="d-flex justify-content-center">
+    <a href="{{ path('dog_list') }}" class="btn btn-outline-danger me-2">Cancel</a>
+    <button class="btn btn-success ms-2">{{ button_label|default('Save') }}</button>
+</div>
 {{ form_end(form) }}

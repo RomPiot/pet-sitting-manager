@@ -26,8 +26,8 @@ class Booking
     #[ORM\ManyToMany(targetEntity: Dog::class, inversedBy: 'bookings')]
     private Collection $dogs;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $price = null;
+    #[ORM\Column(type: Types::INTEGER, length: 255, nullable: true)]
+    private ?int $price = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $inventory = null;
@@ -40,6 +40,9 @@ class Booking
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $textColor = null;
+
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true, options: ['default' => false])]
+    private ?bool $declared = null;
 
     public function __construct()
     {
@@ -99,12 +102,18 @@ class Booking
         return $this;
     }
 
-    public function getPrice(): ?string
+    public function getPriceEuro(): ?string
+    {
+        $profits = floatval($this->getPrice());
+        return number_format(floatval($profits), 0, ',', ' ') . ' €';
+    }
+
+    public function getPrice(): ?int
     {
         return $this->price;
     }
 
-    public function setPrice(?string $price): self
+    public function setPrice(?int $price): self
     {
         $this->price = $price;
 
@@ -155,6 +164,18 @@ class Booking
     public function setTextColor(?string $textColor): self
     {
         $this->textColor = $textColor;
+
+        return $this;
+    }
+
+    public function isDeclared(): ?bool
+    {
+        return $this->declared;
+    }
+
+    public function setDeclared(?bool $declared): self
+    {
+        $this->declared = $declared;
 
         return $this;
     }

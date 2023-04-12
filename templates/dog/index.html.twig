@@ -3,17 +3,22 @@
 {% block title %}Dog index{% endblock %}
 
 {% block body %}
-    <h1>Dog list</h1>
+    <div class="d-flex justify-content-between">
+        <h1>Dog list</h1>
+        <div>
+            <a href="{{ path('dog_new') }}" class="btn btn-primary">Create new</a>
+        </div>
+    </div>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>Background color</th>
-                <th>Text color</th>
-                <th>Birthday</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Name</th>
+            <th>Background color</th>
+            <th>Text color</th>
+            <th>Birthday</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for dog in dogs %}
@@ -34,6 +39,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('dog_new') }}">Create new</a>
 {% endblock %}

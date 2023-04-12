@@ -7,34 +7,35 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Name</th>
-                <td>{{ dog.name }}</td>
-            </tr>
-            <tr>
-                <th>Background color</th>
-                <td>{{ dog.backgroundColor }}</td>
-            </tr>
-            <tr>
-                <th>Text color</th>
-                <td>{{ dog.textColor }}</td>
-            </tr>
-            <tr>
-                <th>Birthday</th>
-                <td>{{ dog.birthday ? dog.birthday|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Breed</th>
-                <td>{{ dog.breed }}</td>
-            </tr>
-            <tr>
-                <th>Food</th>
-                <td>{{ dog.food }}</td>
-            </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ dog.name }}</td>
+        </tr>
+        <tr>
+            <th>Background color</th>
+            <td>{{ dog.backgroundColor }}</td>
+        </tr>
+        <tr>
+            <th>Text color</th>
+            <td>{{ dog.textColor }}</td>
+        </tr>
+        <tr>
+            <th>Birthday</th>
+            <td>{{ dog.birthday ? dog.birthday|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Breed</th>
+            <td>{{ dog.breed }}</td>
+        </tr>
+        <tr>
+            <th>Food</th>
+            <td>{{ dog.food }}</td>
+        </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('dog_list') }}">back to list</a>
-
-    <a href="{{ path('dog_edit', {'id': dog.id}) }}">edit</a>
+    <div class="d-flex justify-content-center">
+        <a href="{{ path('dog_list') }}" class="btn btn-outline-secondary me-2">Back</a>
+        <a href="{{ path('dog_edit', {'id': dog.id}) }}" class="btn btn-primary ms-2">Edit</a>
+    </div>
 {% endblock %}

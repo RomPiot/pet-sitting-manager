@@ -1,20 +1,79 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfitsController!{% endblock %}
+{% block title %}Profits{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="row profits-view" data-date-start="{{ dateStart|date('d-m-Y') }}" data-date-end="{{ dateEnd|date('d-m-Y') }}">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        {{ form_start(filterBookingsForm) }}
+        <div class="row mb-4">
+            <div class="col-2">
+                {{ form_row(filterBookingsForm.dateStart) }}
+            </div>
+            <div class="col-2">
+                {{ form_row(filterBookingsForm.dateEnd) }}
+            </div>
+            <div class="col-4">
+                {{ form_row(filterBookingsForm.dogs) }}
+            </div>
+            <div class="col-2 form-check form-switch d-flex align-items-end justify-content-end">
+                {{ form_row(filterBookingsForm.declared) }}
+            </div>
+            <div class="col-2 d-flex align-items-end justify-content-end">
+                {{ form_row(filterBookingsForm.submit) }}
+            </div>
+        </div>
+        {{ form_end(filterBookingsForm) }}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/src/Controller/ProfitsController.php'|file_link(0) }}">src/Controller/ProfitsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/templates/profits/index.html.twig'|file_link(0) }}">templates/profits/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <hr>
+        <p class="h3 text-center mt-3 mb-4">Profits from {{ dateStart|date('d/m/Y') }} to {{ dateEnd|date('d/m/Y') }}</p>
+        <div class="col-9">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Date Start</th>
+                    <th scope="col">Date End</th>
+                    <th scope="col">Dogs</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Declared</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.dateStart|date('d/m/Y') }}</td>
+                        <td>{{ booking.dateEnd|date('d/m/Y') }}</td>
+                        <td>
+                            {% for dog in booking.dogs %}
+                                {{ dog.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{ booking.priceEuro }}</td>
+                        <td>{% if booking.declared %}Yes{% else %}No{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-3">
+            <div class="col">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <th>Total profits</th>
+                        <td>{{ profits }}</td>
+                    </tr>
+                    <tr>
+                        <th>Declared profits</th>
+                        <td>{{ profitsDeclared }}</td>
+                    </tr>
+                    <tr>
+                        <th>Undeclared profits</th>
+                        <td>{{ profitsUndeclared }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

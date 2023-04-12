@@ -43,7 +43,8 @@ class BookingsController extends AbstractController
                 'end' => $booking->getDateEnd()->format('Y-m-d H:i:s'),
                 'backgroundColor' => $backgroundColor,
                 'borderColor' => $backgroundColor,
-                'textColor' => $booking->getTextcolor() ?? $dogTextColor
+                'textColor' => $booking->getTextcolor() ?? $dogTextColor,
+                'editable' => true,
             ];
         }
 

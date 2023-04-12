@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Booking;
+use App\Entity\Dog;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -63,4 +66,40 @@ class BookingRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findByDateRange(DateTime $dateStart, DateTime $dateEnd)
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.dateStart >= :dateStart')
+            ->andWhere('b.dateEnd <= :dateEnd')
+            ->setParameter('dateStart', $dateStart)
+            ->setParameter('dateEnd', $dateEnd)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param DateTime $dateStart
+     * @param DateTime $dateEnd
+     * @param bool $isDeclared
+     * @param array<Dog> $dogs
+     * @return void
+     */
+    public function findByFilterBookinksForm(DateTime $dateStart, DateTime $dateEnd, bool $isDeclared, ArrayCollection $dogs): ?array
+    {
+        $queryBuilder = $this->createQueryBuilder('b')
+            ->andWhere('b.dateStart >= :dateStart')
+            ->andWhere('b.dateEnd <= :dateEnd')
+            ->setParameter('dateStart', $dateStart)
+            ->setParameter('dateEnd', $dateEnd)
+            ->andWhere('b.declared = :isDeclared')
+            ->setParameter('isDeclared', $isDeclared);
+
+        if ($dogs->count() > 0) {
+            $queryBuilder->join('b.dogs', 'd')
+                ->andWhere('d.id IN (:dogIds)')
+                ->setParameter('dogIds', $dogs->map(function($dog) { return $dog->getId(); })->toArray());
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }
