@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Dog;
 use App\Entity\Owner;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -38,12 +39,11 @@ class OwnerType extends AbstractType
             ])
             ->add('dogs', EntityType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control choices-js',
                 ],
                 'required' => false,
-                'class' => 'App\Entity\Dog',
+                'class' => Dog::class,
                 'multiple' => true,
-                'expanded' => true,
             ])
         ;
     }

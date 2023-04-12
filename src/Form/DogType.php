@@ -38,7 +38,7 @@ class DogType extends AbstractType
                 'required' => false,
                 'class' => 'App\Entity\Owner',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control choices-js',
                 ],
             ])
             ->add('birthday', DateFrenchType::class, [

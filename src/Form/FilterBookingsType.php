@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Dog;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -22,11 +23,10 @@ class FilterBookingsType extends AbstractType
             ])
             ->add('dogs', EntityType::class, [
                 'required' => false,
-                'class' => 'App\Entity\Dog',
+                'class' => Dog::class,
                 'multiple' => true,
-                'expanded' => true,
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control choices-js',
                 ],
             ])
             ->add('declared', CheckboxType::class, [
