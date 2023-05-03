@@ -14,9 +14,10 @@
         <thead>
         <tr>
             <th>Name</th>
+            <th>Race</th>
+            <th>Birthday</th>
             <th>Background color</th>
             <th>Text color</th>
-            <th>Birthday</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -24,6 +25,7 @@
         {% for dog in dogs %}
             <tr>
                 <td>{{ dog.name }}</td>
+                <td>{{ dog.breed }}</td>
                 <td>{{ dog.backgroundColor }}</td>
                 <td>{{ dog.textColor }}</td>
                 <td>{{ dog.birthday ? dog.birthday|date('Y-m-d') : '' }}</td>
