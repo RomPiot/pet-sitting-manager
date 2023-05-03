@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\BookingType;
 use App\Repository\BookingRepository;
 use App\Repository\DogRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,14 +15,6 @@ class BookingsController extends AbstractController
     #[Route('/bookings', name: 'bookings')]
     public function index(BookingRepository $bookingRepository, DogRepository $dogRepository, EntityManagerInterface $entityManager): Response
     {
-//        $booking = new Booking();
-//        $booking->setDateStart(new DateTime('2023-04-03 12:00:00'));
-//        $booking->setDateEnd(new DateTime('2023-04-12 13:00:00'));
-//        $booking->setPrice(1000);
-//        $booking->addDog($dogRepository->find(1));
-//        $entityManager->persist($booking);
-//        $entityManager->flush();
-
         $bookings = $bookingRepository->findAll();
         $bookingsSerialized = [];
         foreach ($bookings as $booking) {
@@ -39,8 +32,8 @@ class BookingsController extends AbstractController
             $bookingsSerialized[] = [
                 'id' => $booking->getId(),
                 'title' => $bookingName,
-                'start' => $booking->getDateStart()->format('Y-m-d H:i:s'),
-                'end' => $booking->getDateEnd()->format('Y-m-d H:i:s'),
+                'start' => $booking->getDateStart()->format('Y-m-d'),
+                'end' => $booking->getDateEnd()->format('Y-m-d'),
                 'backgroundColor' => $backgroundColor,
                 'borderColor' => $backgroundColor,
                 'textColor' => $booking->getTextcolor() ?? $dogTextColor,
@@ -48,9 +41,12 @@ class BookingsController extends AbstractController
             ];
         }
 
+        $bookingForm = $this->createForm(BookingType::class);
+
         return $this->render('bookings/index.html.twig', [
             'bookings' => $bookings,
             'bookingsSerialized' => $bookingsSerialized,
+            'bookingForm' => $bookingForm->createView(),
         ]);
     }
 }

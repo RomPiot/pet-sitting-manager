@@ -1,17 +1,19 @@
 
 import './styles/app.scss';
 import FullCalendar from "./scripts/full_calendar";
+import TinyMCE from "./scripts/tiny_mce";
 import {Datepicker} from 'vanillajs-datepicker';
 import Choices from 'choices.js';
-FullCalendar();
 
+FullCalendar();
+TinyMCE();
 
 const datepickers = document.querySelectorAll('.datepicker');
 if (datepickers) {
     datepickers.forEach(function (el) {
         return new Datepicker(el, {
             buttonClass: 'btn',
-            format: 'dd-mm-yyyy',
+            format: 'dd-mm-yyyy hh:ii',
             autohide: true,
             language: 'fr-FR',
         });
