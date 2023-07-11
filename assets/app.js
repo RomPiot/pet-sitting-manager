@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         datepickers.forEach(function (el) {
             return new Datepicker(el, {
                 buttonClass: 'btn',
-                format: 'dd-mm-yyyy hh:ii',
+                format: 'dd-mm-yyyy',
                 autohide: true,
                 language: 'fr-FR',
             });

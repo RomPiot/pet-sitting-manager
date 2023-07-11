@@ -1,0 +1,11 @@
+{
+  "build/app.css": "/build/app.css",
+  "build/app.js": "/build/app.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_choices_js_public_assets-ab0aee.css": "/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_choices_js_public_assets-ab0aee.css",
+  "build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_choices_js_public_assets-ab0aee.js": "/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_choices_js_public_assets-ab0aee.js",
+  "build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_choices_js_public_assets-caeffa.css": "/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_choices_js_public_assets-caeffa.css",
+  "build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_choices_js_public_assets-caeffa.js": "/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_choices_js_public_assets-caeffa.js",
+  "build/vendors-node_modules_choices_js_public_assets_scripts_choices_js-node_modules_core-js_modules-d3454e.css": "/build/vendors-node_modules_choices_js_public_assets_scripts_choices_js-node_modules_core-js_modules-d3454e.css",
+  "build/vendors-node_modules_choices_js_public_assets_scripts_choices_js-node_modules_core-js_modules-d3454e.js": "/build/vendors-node_modules_choices_js_public_assets_scripts_choices_js-node_modules_core-js_modules-d3454e.js"
+}
