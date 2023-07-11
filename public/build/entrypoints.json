@@ -3,11 +3,11 @@
     "app": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_choices_js_public_assets-ab0aee.js",
+        "/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_choices_js_public_assets-64a03f.js",
         "/build/app.js"
       ],
       "css": [
-        "/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_choices_js_public_assets-ab0aee.css",
+        "/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_choices_js_public_assets-64a03f.css",
         "/build/app.css"
       ]
     }
