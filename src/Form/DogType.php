@@ -44,7 +44,7 @@ class DogType extends AbstractType
             ->add('birthday', DateFrenchType::class, [
                 'required' => false,
             ])
-            ->add('breed', TextareaType::class, [
+            ->add('breed', TextType::class, [
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',
@@ -53,7 +53,7 @@ class DogType extends AbstractType
             ->add('food', TextareaType::class, [
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control tinymce',
                 ],
             ])
         ;
