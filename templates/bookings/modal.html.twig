@@ -1,0 +1,52 @@
+<div class="modal fade" id="modal-booking" tabindex="-1" aria-labelledby="modal-booking-label" aria-hidden="true"
+     data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-booking-label">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ path('bookings') }}" method="POST">
+                {{ form_row(bookingForm._token) }}
+
+                <div class="modal-body container">
+                    <div class="row">
+
+                        <div class="col-6">
+                            {{ form_row(bookingForm.dateStart) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_row(bookingForm.dateEnd) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_row(bookingForm.dogs) }}
+                        </div>
+                        <div class="col-4">
+                            {{ form_row(bookingForm.price) }}
+                        </div>
+                        <div class="col-2 form-check form-switch d-flex align-items-end justify-content-center">
+                            {{ form_row(bookingForm.declared) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_row(bookingForm.inventory) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_row(bookingForm.comment) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_row(bookingForm.backgroundColor) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_row(bookingForm.textColor) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger booking__submit" data-bs-dismiss="modal">Annuler
+                    </button>
+                    {{ form_row(bookingForm.submit) }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

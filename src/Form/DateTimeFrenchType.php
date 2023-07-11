@@ -3,16 +3,17 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DateFrenchType extends AbstractType
+class DateTimeFrenchType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'widget' => 'single_text',
-            'format' => 'yyyy-MM-dd',
+            'format' => 'dd-MM-yyyy HH:mm',
             'html5' => false,
             'attr' => [
                 'readonly' => true,
@@ -23,6 +24,6 @@ class DateFrenchType extends AbstractType
 
     public function getParent(): string
     {
-        return DateType::class;
+        return DateTimeType::class;
     }
 }
