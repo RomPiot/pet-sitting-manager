@@ -1,11 +1,13 @@
 import './styles/app.scss';
 import FullCalendar from "./scripts/full_calendar";
 import TinyMCE from "./scripts/tiny_mce";
+import Charts from "./scripts/chart"
 import {Datepicker} from 'vanillajs-datepicker';
 import Choices from 'choices.js';
 
 FullCalendar();
 TinyMCE();
+Charts();
 
 document.addEventListener('DOMContentLoaded', function () {
     const datepickers = document.querySelectorAll('.datepicker');

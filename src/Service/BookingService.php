@@ -14,7 +14,7 @@ class BookingService
         return $this->convertIntToEuros($profits);
     }
 
-    public function calculateProfitsDeclared(array $bookings): string
+    public function calculateProfitsDeclared(array $bookings, bool$convertInEuros = true): string
     {
         $profits = 0;
         foreach ($bookings as $booking) {
@@ -23,11 +23,14 @@ class BookingService
             }
         }
 
-        return $this->convertIntToEuros($profits);
+        if ($convertInEuros) {
+            return $this->convertIntToEuros($profits);
+        }
 
+        return $profits;
     }
 
-    public function calculateProfitsUndeclared(array $bookings): string
+    public function calculateProfitsUndeclared(array $bookings, bool $convertInEuros = true): string
     {
         $profits = 0;
         foreach ($bookings as $booking) {
@@ -36,7 +39,11 @@ class BookingService
             }
         }
 
-        return $this->convertIntToEuros($profits);
+        if ($convertInEuros) {
+            return $this->convertIntToEuros($profits);
+        }
+
+        return $profits;
     }
 
     public function convertIntToEuros(int $profits): string

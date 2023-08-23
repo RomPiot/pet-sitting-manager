@@ -18,6 +18,7 @@
             <th>Birthday</th>
             <th>Background color</th>
             <th>Text color</th>
+            <th>Owner</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -29,6 +30,7 @@
                 <td>{{ dog.backgroundColor }}</td>
                 <td>{{ dog.textColor }}</td>
                 <td>{{ dog.birthday ? dog.birthday|date('Y-m-d') : '' }}</td>
+                <td>{% if dog.owner %}<a href="{{ path('owner_show', {id: dog.owner.id}) }}">{{ dog.owner.name }}</a>{% endif %}</td>
                 <td>
                     <a href="{{ path('dog_show', {'id': dog.id}) }}">show</a>
                     <a href="{{ path('dog_edit', {'id': dog.id}) }}">edit</a>

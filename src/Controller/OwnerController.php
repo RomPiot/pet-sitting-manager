@@ -34,7 +34,7 @@ class OwnerController extends AbstractController
             return $this->redirectToRoute('owner_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('owner/new.html.twig', [
+        return $this->render('owner/new.html.twig', [
             'owner' => $owner,
             'form' => $form,
         ]);
@@ -55,12 +55,17 @@ class OwnerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $ownerData = $form->getData();
+            foreach ($ownerData->getDogs() as $dog) {
+                $owner->addDog($dog);
+            }
+
             $ownerRepository->save($owner, true);
 
             return $this->redirectToRoute('owner_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('owner/edit.html.twig', [
+        return $this->render('owner/edit.html.twig', [
             'owner' => $owner,
             'form' => $form,
         ]);

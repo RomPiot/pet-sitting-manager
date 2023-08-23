@@ -1,10 +1,20 @@
 import {Calendar} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import {Modal} from 'bootstrap';
-import Choices from "choices.js";
+
+function updateBookingDate(info) {
+    const start = info.event.startStr;
+    const end = info.event.endStr;
+    const eventId = info.event.id;
+
+    const updateBookingDatesUrl = "/bookings/update-dates/" + eventId + "/" + start + "/" + end;
+    fetch(updateBookingDatesUrl)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+        });
+}
 
 export default function () {
     document.addEventListener('DOMContentLoaded', function () {
@@ -20,7 +30,11 @@ export default function () {
             let currentId = null;
 
             const calendar = new Calendar(calendarEl, {
-                plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+                plugins: [dayGridPlugin,
+                    // timeGridPlugin,
+                    // listPlugin,
+                    interactionPlugin
+                ],
                 selectable: true,
                 editable: true,
                 initialView: 'dayGridMonth',
@@ -53,14 +67,10 @@ export default function () {
                     });
                 },
                 eventResize: (info) => {
-                    const start = info.startStr;
-                    const end = info.endStr;
-
-                    const startInput = document.getElementById('booking_dateStart');
-                    const endInput = document.getElementById('booking_dateEnd');
-
-                    startInput.value = start;
-                    endInput.value = end;
+                    updateBookingDate(info);
+                },
+                eventDrop: (info) => {
+                    updateBookingDate(info);
                 },
                 dateClick: function (info) {
                     const date = info.dateStr
@@ -80,33 +90,34 @@ export default function () {
                 eventClick: function (info) {
                     bookingTitleInput.innerText = 'Edit booking';
                     currentId = parseInt(info.event.id);
-
                     const bookings = JSON.parse(calendarEl.dataset.bookings);
+                    const deleteButton = document.querySelector('.bookingDelete');
+                    deleteButton.href = deleteButton.href.replace('toBeReplace', currentId);
 
-                    const url = '/bookings/edit/' + currentId;
-                    fetch(url)
-                        .then(response => response.text())
-                        .then(data => {
-                            const modalToReplace = document.querySelector('#modal-booking')
-                            // replace modalToReplace by data
-                            modalToReplace.outerHTML = data;
-                        }
-                    );
+                    // fetch(url)
+                    //     .then(response => response.text())
+                    //     .then(data => {
+                    //         const modalToReplace = document.querySelector('#modal-booking')
+                    //         // replace modalToReplace by data
+                    //         modalToReplace.outerHTML = data;
+                    //     }
+                    // );
 
-                    // const booking = bookings.find(booking => booking.id === currentId);
-                    // console.log(booking)
-                    //
-                    // const startInput = document.getElementById('booking_dateStart');
-                    // const endInput = document.getElementById('booking_dateEnd');
-                    // const priceInput = document.getElementById('booking_price');
-                    // const statusInput = document.getElementById('booking_declared');
-                    // const inventoryInput = document.getElementById('booking_inventory');
-                    // const commentInput = document.getElementById('booking_comment');
-                    // const backgroundColorInput = document.getElementById('booking_backgroundColor');
-                    // const textColorInput = document.getElementById('booking_textColor');
-                    // const dogsInputSelect = document.getElementById('booking_dogs');
-                    // const dogsChoices = document.querySelectorAll('.choices__item--choice');
+                    const booking = bookings.find(booking => booking.id === currentId);
+                    console.log(booking)
+
+                    const startInput = document.getElementById('booking_dateStart');
+                    const endInput = document.getElementById('booking_dateEnd');
+                    const priceInput = document.getElementById('booking_price');
+                    const statusInput = document.getElementById('booking_declared');
+                    const inventoryInput = document.getElementById('booking_inventory');
+                    const commentInput = document.getElementById('booking_comment');
+                    const backgroundColorInput = document.getElementById('booking_backgroundColor');
+                    const textColorInput = document.getElementById('booking_textColor');
+                    const dogsInputSelect = document.getElementById('booking_dogs');
+                    const dogsChoices = document.querySelectorAll('.choices__item--choice');
                     // console.log(dogsChoices);
+                    // dogsInputSelect.value = dogsChoices;
 
 
                     // booking.dogs.forEach(dog => {
@@ -126,21 +137,21 @@ export default function () {
                     //             newChoice.setAttribute('aria-selected', 'true');
                     //             newChoice.innerHTML = dog.name;
                     //             choicesList.appendChild(newChoice);
-
+                    //
                     // }
                     // })
                     // });
 
-                    // startInput ? startInput.value = booking.start : null;
-                    // endInput ? endInput.value = booking.end : null;
-                    // // dogsInputSelect ? dogsInputSelect.value = booking.dogs : null;
-                    // // dogsInputSelect ? dogsInputSelect.value = booking.dogs.map(dog => dog.id) : null;
-                    // priceInput ? priceInput.value = booking.price : null;
-                    // statusInput ? statusInput.value = booking.status : null;
-                    // inventoryInput ? inventoryInput.value = booking.inventory : null;
-                    // commentInput ? commentInput.value = booking.comment : null;
-                    // backgroundColorInput ? backgroundColorInput.value = booking.backgroundColor : null;
-                    // textColorInput ? textColorInput.value = booking.textColor : null;
+                    startInput ? startInput.value = booking.start : null;
+                    endInput ? endInput.value = booking.end : null;
+                    // dogsInputSelect ? dogsInputSelect.value = booking.dogs : null;
+                    // dogsInputSelect ? dogsInputSelect.value = booking.dogs.map(dog => dog.id) : null;
+                    priceInput ? priceInput.value = booking.price : null;
+                    statusInput ? statusInput.value = booking.status : null;
+                    inventoryInput ? inventoryInput.value = booking.inventory : null;
+                    commentInput ? commentInput.value = booking.comment : null;
+                    backgroundColorInput ? backgroundColorInput.value = booking.backgroundColor : null;
+                    textColorInput ? textColorInput.value = booking.textColor : null;
 
                     bookingModal.show();
                     bookingModalEl.addEventListener('shown.bs.modal', function () {

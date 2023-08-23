@@ -6,7 +6,9 @@ use App\Entity\Booking;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
 use App\Repository\DogRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -103,6 +105,34 @@ class BookingsController extends AbstractController
         return $this->render('bookings/modal.html.twig', [
             'booking' => $booking,
             'bookingForm' => $bookingForm->createView(),
+        ]);
+    }
+
+    #[Route('/bookings/delete/{booking}', name: 'booking_delete')]
+    public function deleteBooking(Booking $booking, BookingRepository $bookingRepository, DogRepository $dogRepository, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($booking);
+        $entityManager->flush();
+        $this->addFlash('success', 'Booking removed successfully');
+        return $this->redirectToRoute('bookings');
+    }
+
+    /**
+     * @throws Exception
+     */
+    #[Route('/bookings/update-dates/{booking}/{dateStart}/{dateEnd}', name: 'booking_update_dates')]
+    public function updateDatesBooking(Booking $booking, BookingRepository $bookingRepository, DogRepository $dogRepository, EntityManagerInterface $entityManager): Response
+    {
+        $dateStart = new DateTime($this->requestStack->getCurrentRequest()->get('dateStart'));
+        $dateEnd = new DateTime($this->requestStack->getCurrentRequest()->get('dateEnd'));
+        $booking->setDateStart($dateStart);
+        $booking->setDateEnd($dateEnd);
+        $entityManager->persist($booking);
+        $entityManager->flush();
+        $this->addFlash('success', 'Booking dates updated successfully');
+
+        return $this->json([
+            'success' => true,
         ]);
     }
 }

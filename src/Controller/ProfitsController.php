@@ -38,11 +38,16 @@ class ProfitsController extends AbstractController
         $profitsDeclared = $bookingService->calculateProfitsDeclared($bookings);
         $profitsUndeclared = $bookingService->calculateProfitsUndeclared($bookings);
 
+        $profitsDeclaredInt =$bookingService->calculateProfitsDeclared($bookings, false);
+        $profitsUndeclaredInt =$bookingService->calculateProfitsUndeclared($bookings, false);
+
         return $this->render('profits/index.html.twig', [
             'bookings' => $bookings,
             'profits' => $profits,
             'profitsDeclared' => $profitsDeclared,
+            'profitsDeclaredInt' => $profitsDeclaredInt,
             'profitsUndeclared' => $profitsUndeclared,
+            'profitsUndeclaredInt' => $profitsUndeclaredInt,
             'filterBookingsForm' => $filterBookingsForm->createView(),
             'dateStart' => $dateStart,
             'dateEnd' => $dateEnd,

@@ -100,10 +100,8 @@ class Owner
     public
     function addDog(Dog $dog): self
     {
-        if (!$this->dogs->contains($dog)) {
-            $this->dogs->add($dog);
-            $dog->setOwner($this);
-        }
+        $this->dogs->add($dog);
+        $dog->setOwner($this);
 
         return $this;
     }
@@ -112,7 +110,6 @@ class Owner
     function removeDog(Dog $dog): self
     {
         if ($this->dogs->removeElement($dog)) {
-            // set the owning side to null (unless already changed)
             if ($dog->getOwner() === $this) {
                 $dog->setOwner(null);
             }

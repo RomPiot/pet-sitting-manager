@@ -55,12 +55,14 @@ class BookingType extends AbstractType
                 'data' => $booking->isDeclared() ?? false,
             ])
             ->add('inventory', TextareaType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'tinymce',
                 ],
                 'data' => $booking->getInventory() ?? '',
             ])
             ->add('comment', TextareaType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'tinymce',
                 ],
