@@ -26,9 +26,11 @@ class BookingType extends AbstractType
             ->add('dateStart', DateTimeFrenchType::class,
                 [
                     'data' => $booking->getDateStart(),
+                    'label' => 'Date de début',
                 ])
             ->add('dateEnd', DateTimeFrenchType::class, [
                 'data' => $booking->getDateEnd(),
+                'label' => 'Date de fin',
             ])
             ->add('dogs', EntityType::class, [
                 'required' => false,
@@ -39,12 +41,14 @@ class BookingType extends AbstractType
                 ],
                 'data' => $booking->getDogs(),
                 'choice_value' => 'id',
+                'label' => 'Chiens',
             ])
             ->add('price', IntegerType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
                 'data' => $booking->getPrice() ?? 0,
+                'label' => 'Prix',
             ])
             ->add('declared', CheckboxType::class, [
                 'required' => false,
@@ -55,6 +59,7 @@ class BookingType extends AbstractType
                     'class' => 'form-check-label'
                 ],
                 'data' => $booking->isDeclared() ?? false,
+                'label' => 'Déclaré',
             ])
             ->add('inventory', TextareaType::class, [
                 'required' => false,
@@ -62,6 +67,7 @@ class BookingType extends AbstractType
                     'class' => 'tinymce',
                 ],
                 'data' => $booking->getInventory() ?? '',
+                'label' => 'Inventaire',
             ])
             ->add('comment', TextareaType::class, [
                 'required' => false,
@@ -69,6 +75,7 @@ class BookingType extends AbstractType
                     'class' => 'tinymce',
                 ],
                 'data' => $booking->getComment() ?? '',
+                'label' => 'Commentaire',
             ])
             ->add('backgroundColor', ColorType::class,
                 [
@@ -76,6 +83,7 @@ class BookingType extends AbstractType
                     'attr' => [
                         'class' => 'form-control',
                     ],
+                    'label' => 'Couleur de fond',
                 ]
             )
             ->add('textColor', ColorType::class, [
@@ -83,6 +91,7 @@ class BookingType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
+                'label' => 'Couleur du texte',
             ])
 //            ->add('submit', SubmitType::class, [
 //                'label' => 'Create',

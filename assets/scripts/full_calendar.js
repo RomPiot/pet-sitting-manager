@@ -24,6 +24,7 @@ export default function () {
             let currentId = null;
 
             const calendar = new Calendar(calendarEl, {
+                locale: 'fr',
                 plugins: [
                     dayGridPlugin,
                     timeGridPlugin,
@@ -39,14 +40,27 @@ export default function () {
                 dayMaxEvents: true,
                 events: bookings,
                 buttonText: {
-                    prev: 'Previous',
-                    next: 'Next'
+                    prev: 'Précédent',
+                    next: 'Suivant',
+                    today: 'Aujourd\'hui',
+                    month: 'Mois',
+                    week: 'Semaine',
+                    day: 'Jour',
+                    list: 'Liste',
                 },
+                allDayText: 'Toute la journée',
+                noEventsText: 'Aucun événement à afficher',
+                weekTextLong: 'Semaine',
+                weekTextShort: 'Sem',
+                timeText: 'Heure',
+                weekText: 'Semaine',
+                moreLinkText: 'Voir plus',
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
+
                 select: (info) => {
                     const start = info.startStr;
                     const end = info.endStr;

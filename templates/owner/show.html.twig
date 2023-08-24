@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Owner{% endblock %}
+{% block title %}Propriétaire{% endblock %}
 
 {% block body %}
-    <h1>Owner</h1>
+    <h1>Propriétaire</h1>
 
     <table class="table">
         <tbody>
         <tr>
-            <th>Name</th>
+            <th>Nom</th>
             <td>{{ owner.name }}</td>
         </tr>
         <tr>
-            <th>Address</th>
+            <th>Adresse</th>
             <td>{{ owner.address }}</td>
         </tr>
         <tr>
@@ -23,7 +23,7 @@
     </table>
 
     <div class="d-flex justify-content-center">
-        <a href="{{ path('owner_list') }}" class="btn btn-outline-secondary me-2">Back</a>
-        <a href="{{ path('owner_edit', {'id': owner.id}) }}" class="btn btn-primary ms-2">Edit</a>
+        <a href="{{ path('owner_list') }}" class="btn btn-outline-secondary me-2">Retour</a>
+        <a href="{{ path('owner_edit', {'id': owner.id}) }}" class="btn btn-primary ms-2">Modifier</a>
     </div>
 {% endblock %}

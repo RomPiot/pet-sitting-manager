@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // select form name owner
     const formOwner = document.querySelector('form[name="owner"]');
-    if (formOwner) {
+    const filterBookings = document.querySelector('#filter_bookings_dogs');
+    if (formOwner || filterBookings) {
         const choicesJsElements = document.querySelectorAll('.choices-js');
         console.log(choicesJsElements)
         if (choicesJsElements) {

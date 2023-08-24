@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Booking{% endblock %}
+{% block title %}Réservation{% endblock %}
 
 {% block body %}
     <h1>Booking</h1>
@@ -12,43 +12,43 @@
                 <td>{{ booking.id }}</td>
             </tr>
             <tr>
-                <th>DateStart</th>
-                <td>{{ booking.dateStart ? booking.dateStart|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Date de début</th>
+                <td>{{ booking.dateStart ? booking.dateStart|date('Y-m-d H:i') : '' }}</td>
             </tr>
             <tr>
-                <th>DateEnd</th>
-                <td>{{ booking.dateEnd ? booking.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Date de fin</th>
+                <td>{{ booking.dateEnd ? booking.dateEnd|date('Y-m-d H:i') : '' }}</td>
             </tr>
             <tr>
-                <th>Price</th>
+                <th>Prix</th>
                 <td>{{ booking.price }}</td>
             </tr>
             <tr>
-                <th>Inventory</th>
+                <th>Inventaire</th>
                 <td>{{ booking.inventory }}</td>
             </tr>
             <tr>
-                <th>Comment</th>
+                <th>Commentaire</th>
                 <td>{{ booking.comment }}</td>
             </tr>
             <tr>
-                <th>BackgroundColor</th>
+                <th>Couleur de fond</th>
                 <td>{{ booking.backgroundColor }}</td>
             </tr>
             <tr>
-                <th>TextColor</th>
+                <th>Couleur du texte</th>
                 <td>{{ booking.textColor }}</td>
             </tr>
             <tr>
-                <th>Declared</th>
+                <th>Déclaré ?</th>
                 <td>{{ booking.declared ? 'Yes' : 'No' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('bookings') }}">back to list</a>
+    <a href="{{ path('bookings') }}">Retour</a>
 
-    <a href="{{ path('booking_edit', {'id': booking.id}) }}">edit</a>
+    <a href="{{ path('booking_edit', {'id': booking.id}) }}">Modifier</a>
 
     {{ include('booking/_delete_form.html.twig') }}
 {% endblock %}

@@ -1,25 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dog index{% endblock %}
+{% block title %}Chiens{% endblock %}
 
 {% block body %}
     <div class="d-flex justify-content-between">
-        <h1>Dog list</h1>
+        <h1>Liste des chiens</h1>
         <div>
-            <a href="{{ path('dog_new') }}" class="btn btn-primary">Create new</a>
+            <a href="{{ path('dog_new') }}" class="btn btn-primary">Créer</a>
         </div>
     </div>
 
     <table class="table">
         <thead>
         <tr>
-            <th>Name</th>
+            <th>Nom</th>
             <th>Race</th>
-            <th>Birthday</th>
-            <th>Background color</th>
-            <th>Text color</th>
-            <th>Owner</th>
-            <th>actions</th>
+            <th>Date de naissance</th>
+            <th>Couleur de fond</th>
+            <th>Couleur du texte</th>
+            <th>Propriétaire</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -32,13 +32,13 @@
                 <td>{{ dog.birthday ? dog.birthday|date('Y-m-d') : '' }}</td>
                 <td>{% if dog.owner %}<a href="{{ path('owner_show', {id: dog.owner.id}) }}">{{ dog.owner.name }}</a>{% endif %}</td>
                 <td>
-                    <a href="{{ path('dog_show', {'id': dog.id}) }}">show</a>
-                    <a href="{{ path('dog_edit', {'id': dog.id}) }}">edit</a>
+                    <a href="{{ path('dog_show', {'id': dog.id}) }}">Voir</a>
+                    <a href="{{ path('dog_edit', {'id': dog.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Aucun enregistrement</td>
             </tr>
         {% endfor %}
         </tbody>

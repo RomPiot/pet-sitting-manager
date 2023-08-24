@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profits{% endblock %}
+{% block title %}Gains{% endblock %}
 
 {% block body %}
     <div class="row profits-view" data-date-start="{{ dateStart|date('d-m-Y') }}"
@@ -28,17 +28,17 @@
         {{ form_end(filterBookingsForm) }}
 
         <hr>
-        <p class="h3 text-center mt-3 mb-4">Profits from {{ dateStart|date('d/m/Y') }}
-            to {{ dateEnd|date('d/m/Y') }}</p>
+        <p class="h3 text-center mt-3 mb-4">Gains du {{ dateStart|date('d/m/Y') }}
+            au {{ dateEnd|date('d/m/Y') }}</p>
         <div class="col-8">
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">Date Start</th>
-                    <th scope="col">Date End</th>
-                    <th scope="col">Dogs</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Declared</th>
+                    <th scope="col">Date de début</th>
+                    <th scope="col">Date fin</th>
+                    <th scope="col">Chiens</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Declaré</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -52,7 +52,7 @@
                             {% endfor %}
                         </td>
                         <td>{{ booking.priceEuro }}</td>
-                        <td>{% if booking.declared %}Yes{% else %}No{% endif %}</td>
+                        <td>{% if booking.declared %}Oui{% else %}Non{% endif %}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -63,15 +63,15 @@
                 <table class="table table-bordered">
                     <tbody>
                     <tr>
-                        <th>Total profits</th>
+                        <th>Total des gains</th>
                         <td>{{ profits }}</td>
                     </tr>
                     <tr>
-                        <th>Declared profits</th>
+                        <th>Gains déclarés</th>
                         <td>{{ profitsDeclared }}</td>
                     </tr>
                     <tr>
-                        <th>Undeclared profits</th>
+                        <th>Gains non déclarés</th>
                         <td>{{ profitsUndeclared }}</td>
                     </tr>
                     </tbody>

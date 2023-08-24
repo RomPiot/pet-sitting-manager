@@ -22,17 +22,20 @@ class DogType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
+                'label' => 'Nom',
             ])
             ->add('backgroundColor', ColorType::class,
                 [
                     'attr' => [
                         'class' => 'form-control',
                     ],
+                    'label' => 'Couleur de fond',
                 ])
             ->add('textColor', ColorType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
+                'label' => 'Couleur du texte',
             ])
             ->add('Owner', EntityType::class, [
                 'required' => false,
@@ -40,24 +43,27 @@ class DogType extends AbstractType
                 'attr' => [
                     'class' => 'form-control choices-js',
                 ],
+                'label' => 'Propriétaire',
             ])
             ->add('birthday', DateFrenchType::class, [
                 'required' => false,
+                'label' => 'Date de naissance',
             ])
             ->add('breed', TextType::class, [
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                 ],
+                'label' => 'Race'
             ])
             ->add('food', TextareaType::class, [
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control tinymce',
                 ],
+                'label' => 'Alimentation',
             ])
         ;
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

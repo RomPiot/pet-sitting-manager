@@ -17,9 +17,11 @@ class FilterBookingsType extends AbstractType
         $builder
             ->add('dateStart', DateFrenchType::class, [
                 'required' => false,
+                'label' => 'Date de début',
             ])
             ->add('dateEnd', DateFrenchType::class, [
                 'required' => false,
+                'label' => 'Date de fin',
             ])
             ->add('dogs', EntityType::class, [
                 'required' => false,
@@ -28,6 +30,7 @@ class FilterBookingsType extends AbstractType
                 'attr' => [
                     'class' => 'form-control choices-js',
                 ],
+                'label' => 'Chiens',
             ])
             ->add('declared', CheckboxType::class, [
                 'required' => false,
@@ -36,7 +39,8 @@ class FilterBookingsType extends AbstractType
                 ],
                 'label_attr' => [
                     'class' => 'form-check-label'
-                ]
+                ],
+                'label' => 'Déclaré',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Filter',

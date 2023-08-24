@@ -21,12 +21,14 @@ class OwnerType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
+                'label' => 'Nom',
             ])
             ->add('address', TextareaType::class, [
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                 ],
+                'label' => 'Adresse',
             ])
             ->add('contacts', CollectionType::class, [
                 'attr' => [
@@ -36,6 +38,7 @@ class OwnerType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'label' => 'Contacts',
             ])
             ->add('dogs', EntityType::class, [
                 'attr' => [
@@ -44,6 +47,7 @@ class OwnerType extends AbstractType
                 'required' => false,
                 'class' => Dog::class,
                 'multiple' => true,
+                'label' => 'Chiens',
             ])
         ;
     }
