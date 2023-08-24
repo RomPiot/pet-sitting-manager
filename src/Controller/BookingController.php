@@ -25,10 +25,9 @@ class BookingController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/', name: 'bookings', methods: ['GET'])]
+    #[Route('/', name: 'bookings')]
     public function index(BookingRepository $bookingRepository): Response
     {
-        $request = $this->requestStack->getCurrentRequest();
         $bookings = $bookingRepository->findAll();
         $bookingsSerialized = $this->getBookingsSerialized($bookingRepository);
 
@@ -50,11 +49,11 @@ class BookingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($booking->getDogs()->count() === 0) {
-                $this->addFlash('danger', 'You must select at least one dog');
+                $this->addFlash('danger', 'Vous devez selectionner au moins un chien');
                 return $this->redirectToRoute('booking_new');
             }
 
-            $this->addFlash('success', 'Booking created successfully');
+            $this->addFlash('success', 'Réservation créée avec succès');
             $bookingRepository->save($booking, true);
 
             return $this->redirectToRoute('bookings', [], Response::HTTP_SEE_OTHER);
@@ -96,11 +95,11 @@ class BookingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($booking->getDogs()->count() === 0) {
-                $this->addFlash('danger', 'You must select at least one dog');
+                $this->addFlash('danger', 'Vous devez selectionner au moins un chien');
                 return $this->redirectToRoute('booking_new');
             }
 
-            $this->addFlash('success', 'Booking created successfully');
+            $this->addFlash('success', 'Réservation créée avec succès');
             $bookingRepository->save($booking, true);
 
             return $this->redirectToRoute('bookings', [], Response::HTTP_SEE_OTHER);
@@ -132,11 +131,11 @@ class BookingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($booking->getDogs()->count() === 0) {
-                $this->addFlash('danger', 'You must select at least one dog');
+                $this->addFlash('danger', 'Vous devez selectionner au moins un chien');
                 return $this->redirectToRoute($request->get('_route'), $request->query->all());
             }
 
-            $this->addFlash('success', 'Booking edited successfully');
+            $this->addFlash('success', 'Réservation modifiée avec succès');
             $this->entityManager->persist($booking);
             $this->entityManager->flush();
 
@@ -185,7 +184,7 @@ class BookingController extends AbstractController
         $entityManager->persist($booking);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Booking dates updated successfully');
+        $this->addFlash('success', 'Dates de réservation modifiées avec succès');
 
         return $this->redirectToRoute('bookings');
     }

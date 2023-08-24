@@ -19,8 +19,12 @@ class BookingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var Booking $booking */
-        $booking = $options['data'];
+        if (array_key_exists('data', $options) && ($options['data'] instanceof Booking)) {
+            /** @var Booking $booking */
+            $booking = $options['data'];
+        } else {
+            $booking = new Booking();
+        }
 
         $builder
             ->add('dateStart', DateTimeFrenchType::class,

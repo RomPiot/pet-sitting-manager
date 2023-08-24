@@ -15,8 +15,8 @@ export default function () {
 
             var profitData = {
                 labels: [
-                    "Declared",
-                    "No declared",
+                    "Declaré",
+                    "Non déclaré",
                 ],
                 datasets: [
                     {
@@ -24,7 +24,6 @@ export default function () {
                         backgroundColor: [
                             "#1ed7bc",
                             "#ff9102",
-
                         ]
                     }]
             };
@@ -40,7 +39,7 @@ export default function () {
                         },
                         title: {
                             display: true,
-                            text: 'Déclared VS No declared'
+                            text: 'Déclaré VS Non declaré'
                         }
                     }
                 },
