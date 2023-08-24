@@ -1,6 +1,5 @@
 <div class="modal fade" id="modal-booking" tabindex="-1" aria-labelledby="modal-booking-label" aria-hidden="true"
      data-bs-backdrop="static" data-bs-keyboard="false">
-    {{                     dump(bookingForm.vars.value) }}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,6 +10,7 @@
                 {{ form_row(bookingForm._token) }}
                 <div class="modal-body container">
                     <div class="row">
+                        {{ form_row(bookingForm.bookingId) }}
                         <div class="col-6">
                             {{ form_row(bookingForm.dateStart) }}
                         </div>
@@ -41,8 +41,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ path('booking_delete', {'booking': 'toBeReplace'}) }}" type="button" class="btn btn-danger bookingDelete">Delete</a>
-{#                    <button type="button" class="btn btn-danger booking__submit" data-bs-dismiss="modal">Cancel</button>#}
+                    <a href="{{ path('booking_delete', {'booking': 'toBeReplace'}) }}" type="button"
+                       class="btn btn-danger bookingDelete">Delete</a>
                     {{ form_row(bookingForm.submit) }}
                 </div>
             </form>

@@ -3,6 +3,14 @@
 {% block title %}Bookings{% endblock %}
 
 {% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <div class="full-calendar" data-bookings="{{ bookingsSerialized|json_encode() }}"></div>
 
     <!-- Modal -->

@@ -70,22 +70,44 @@ class BookingsController extends AbstractController
         $bookingForm = $this->createForm(BookingType::class, $booking);
 
         $bookingForm->handleRequest($request);
-//        if ($bookingForm->isSubmitted()) {
-//            if (!$bookingForm->isValid()) {
-//                dd($bookingForm->getErrors(true));
-//            }
-//        }
+
         if ($bookingForm->isSubmitted() && $bookingForm->isValid()) {
-            // check if booking already exists
+            $booking = $bookingForm->getData();
+            $bookingData = $request->request->all()['booking'];
+            $bookingId = $bookingData['bookingId'];
             $existingBooking = $bookingRepository->findOneBy([
-                'id' => $booking->getId(),
+                'id' => $bookingId,
             ]);
             if ($existingBooking) {
-                dd('existing booking');
+                $bookingToEdit = $existingBooking;
+                $bookingToEdit->setDateStart($booking->getDateStart());
+                $bookingToEdit->setDateEnd($booking->getDateEnd());
+                $bookingToEdit->setPrice($booking->getPrice());
+                $bookingToEdit->setInventory($booking->getInventory());
+                $bookingToEdit->setComment($booking->getComment());
+                $bookingToEdit->setBackgroundColor($booking->getBackgroundColor());
+                $bookingToEdit->setTextColor($booking->getTextColor());
+                $bookingToEdit->setDeclared($booking->isDeclared());
+                $bookingToEdit->setDogs($booking->getDogs());
+                $booking = $bookingToEdit;
+
+                if ($booking->getDogs()->count() === 0) {
+                    $this->addFlash('danger', 'You must select at least one dog');
+                    return $this->redirectToRoute('bookings');
+                }
+
+                $this->addFlash('success', 'Booking updated successfully');
+            } else {
+                if ($booking->getDogs()->count() === 0) {
+                    $this->addFlash('danger', 'You must select at least one dog');
+                    return $this->redirectToRoute('bookings');
+                }
+
+                $this->addFlash('success', 'Booking created successfully');
             }
+
             $entityManager->persist($booking);
             $entityManager->flush();
-            $this->addFlash('success', 'Réservation créée avec succès');
             return $this->redirectToRoute('bookings');
         }
 
@@ -97,7 +119,8 @@ class BookingsController extends AbstractController
         ]);
     }
 
-    #[Route('/bookings/edit/{booking}', name: 'booking_edit')]
+    #[
+        Route('/bookings/edit/{booking}', name: 'booking_edit')]
     public function editBooking(Booking $booking, BookingRepository $bookingRepository, DogRepository $dogRepository, EntityManagerInterface $entityManager): Response
     {
         $bookingForm = $this->createForm(BookingType::class, $booking);

@@ -86,6 +86,13 @@ class Booking
         return $this->dogs;
     }
 
+    public function setDogs(Collection $dogs): self
+    {
+        $this->dogs = $dogs;
+
+        return $this;
+    }
+
     public function addDog(Dog $dog): self
     {
         if (!$this->dogs->contains($dog)) {

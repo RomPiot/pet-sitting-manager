@@ -22,12 +22,13 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@eonasdan/tempus-dominus": "^6.7.13",
         "@fullcalendar/core": "^6.1.5",
         "@fullcalendar/daygrid": "^6.1.5",
         "@fullcalendar/interaction": "^6.1.5",
         "@fullcalendar/list": "^6.1.5",
         "@fullcalendar/timegrid": "^6.1.5",
-        "@popperjs/core": "^2.11.7",
+        "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.2.3",
         "chart.js": "^4.3.3",
         "choices.js": "^10.2.0",

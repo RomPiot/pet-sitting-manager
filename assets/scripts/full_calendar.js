@@ -2,6 +2,7 @@ import {Calendar} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import {Modal} from 'bootstrap';
+import Choices from "choices.js";
 
 function updateBookingDate(info) {
     const start = info.event.startStr;
@@ -16,6 +17,20 @@ function updateBookingDate(info) {
         });
 }
 
+function createDogChoices() {
+    const choicesJsElements = document.querySelectorAll('.choices-js');
+    if (choicesJsElements) {
+        choicesJsElements.forEach(function (el) {
+            return new Choices(el, {
+                searchEnabled: true,
+                itemSelectText: '',
+                shouldSort: true,
+                removeItemButton: true,
+            });
+        });
+    }
+}
+
 export default function () {
     document.addEventListener('DOMContentLoaded', function () {
         const calendarEl = document.querySelector('.full-calendar');
@@ -26,15 +41,16 @@ export default function () {
             const bookingModal = new Modal(bookingModalEl);
             const bookingTitleInput = document.getElementById('modal-booking-label');
 
-            // current id selection
             let currentId = null;
 
             const calendar = new Calendar(calendarEl, {
-                plugins: [dayGridPlugin,
+                plugins: [
+                    dayGridPlugin,
                     // timeGridPlugin,
                     // listPlugin,
                     interactionPlugin
                 ],
+                defaultAllDay: false,
                 selectable: true,
                 editable: true,
                 initialView: 'dayGridMonth',
@@ -48,9 +64,15 @@ export default function () {
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,listWeek'
+                    right: 'dayGridMonth'
                 },
                 select: (info) => {
+                    createDogChoices();
+                    const deleteButton = document.querySelector('.bookingDelete');
+                    if (deleteButton) {
+                        deleteButton.classList.add('d-none');
+                    }
+
                     bookingModal.show();
                     bookingTitleInput.innerText = 'New booking';
                     const start = info.startStr;
@@ -73,6 +95,11 @@ export default function () {
                     updateBookingDate(info);
                 },
                 dateClick: function (info) {
+                    createDogChoices();
+                    const deleteButton = document.querySelector('.bookingDelete');
+                    if (deleteButton) {
+                        deleteButton.classList.add('d-none');
+                    }
                     const date = info.dateStr
                     const startInput = document.getElementById('booking_dateStart');
                     const endInput = document.getElementById('booking_dateEnd');
@@ -89,19 +116,26 @@ export default function () {
                 },
                 eventClick: function (info) {
                     bookingTitleInput.innerText = 'Edit booking';
+                    const submitButton = document.getElementById('booking_submit');
+                    submitButton.innerText = 'Edit';
                     currentId = parseInt(info.event.id);
+
                     const bookings = JSON.parse(calendarEl.dataset.bookings);
                     const deleteButton = document.querySelector('.bookingDelete');
+                    if (deleteButton) {
+                        deleteButton.classList.remove('d-none');
+                    }
                     deleteButton.href = deleteButton.href.replace('toBeReplace', currentId);
 
-                    // fetch(url)
-                    //     .then(response => response.text())
-                    //     .then(data => {
-                    //         const modalToReplace = document.querySelector('#modal-booking')
-                    //         // replace modalToReplace by data
-                    //         modalToReplace.outerHTML = data;
-                    //     }
-                    // );
+                    const editBookingUrl = "/bookings/edit/" + currentId;
+                    let editFormResponse = null;
+
+                    fetch(editBookingUrl)
+                        .then(response => response.text())
+                        .then(data => {
+                                editFormResponse = data;
+                            }
+                        );
 
                     const booking = bookings.find(booking => booking.id === currentId);
                     console.log(booking)
@@ -114,44 +148,40 @@ export default function () {
                     const commentInput = document.getElementById('booking_comment');
                     const backgroundColorInput = document.getElementById('booking_backgroundColor');
                     const textColorInput = document.getElementById('booking_textColor');
-                    const dogsInputSelect = document.getElementById('booking_dogs');
-                    const dogsChoices = document.querySelectorAll('.choices__item--choice');
-                    // console.log(dogsChoices);
-                    // dogsInputSelect.value = dogsChoices;
+                    const bookingIdInput = document.getElementById('booking_bookingId');
 
+                    const choicesJsElements = document.querySelectorAll('.choices-js');
 
-                    // booking.dogs.forEach(dog => {
-                    //     console.log(dog)
-                    //     dogsChoices.forEach(choice => {
-                    //         if (choice.dataset.value === dog.id.toString()) {
-                    //             console.log(choice)
-                    //             // select this choice in the select
-                    //             choice.classList.add('choices__item--selected');
-                    //             // add this choice to the select
-                    //             const choicesList = document.querySelector('.choices__list--multiple');
-                    //             const newChoice = document.createElement('div');
-                    //             newChoice.classList.add('choices__item', 'choices__item--choice', 'choices__item--selectable', 'choices__item--removable', 'is-highlighted', 'is-selected');
-                    //             newChoice.setAttribute('data-item', '');
-                    //             newChoice.setAttribute('data-id', dog.id);
-                    //             newChoice.setAttribute('data-value', dog.id);
-                    //             newChoice.setAttribute('aria-selected', 'true');
-                    //             newChoice.innerHTML = dog.name;
-                    //             choicesList.appendChild(newChoice);
-                    //
-                    // }
-                    // })
-                    // });
+                    const dogIdsToSelect = booking.dogs.map(dog => dog.id);
+                    console.log(dogIdsToSelect);
+
+                    if (choicesJsElements) {
+                        choicesJsElements.forEach(function (choiceJsElement) {
+                            for (let i = 0; i < choiceJsElement.options.length; i++) {
+                                const option = choiceJsElement.options[i];
+                                if (dogIdsToSelect.includes(parseInt(option.value))) {
+                                    option.selected = true;
+                                }
+                            }
+
+                            return new Choices(choiceJsElement, {
+                                searchEnabled: true,
+                                itemSelectText: '',
+                                shouldSort: true,
+                                removeItemButton: true,
+                            });
+                        });
+                    }
 
                     startInput ? startInput.value = booking.start : null;
                     endInput ? endInput.value = booking.end : null;
-                    // dogsInputSelect ? dogsInputSelect.value = booking.dogs : null;
-                    // dogsInputSelect ? dogsInputSelect.value = booking.dogs.map(dog => dog.id) : null;
                     priceInput ? priceInput.value = booking.price : null;
                     statusInput ? statusInput.value = booking.status : null;
                     inventoryInput ? inventoryInput.value = booking.inventory : null;
                     commentInput ? commentInput.value = booking.comment : null;
                     backgroundColorInput ? backgroundColorInput.value = booking.backgroundColor : null;
                     textColorInput ? textColorInput.value = booking.textColor : null;
+                    bookingIdInput ? bookingIdInput.value = currentId : null;
 
                     bookingModal.show();
                     bookingModalEl.addEventListener('shown.bs.modal', function () {
@@ -160,32 +190,6 @@ export default function () {
                 }
             });
             calendar.render();
-
-            // document.getElementById('addNewEventForm').addEventListener('submit', function (event) {
-            //     event.preventDefault();
-            //     calendar.addEvent({
-            //         id: Math.random() * 10000, // this should be a unique id from your back-end or API
-            //         title: bookingTitleInput.value,
-            //         start: '2021-05-01',
-            //         end: '2021-05-01',
-            //         className: 'bg-secondary',
-            //         dragabble: true
-            //     });
-            //     bookingModal.hide();
-            // });
-            //
-            // document.getElementById('editEventForm').addEventListener('submit', function (event) {
-            //     event.preventDefault();
-            //     const editEvent = calendar.getEventById(currentId);
-            //     const startDate = '2021-05-01';
-            //     const endDate = '2021-05-01';
-            //
-            //     editEvent.setProp('title', bookingTitleInput.value);
-            //     editEvent.setStart(startDate);
-            //     editEvent.setEnd(endDate);
-            //     bookingModal.hide();
-            // });
         }
-
     });
 }

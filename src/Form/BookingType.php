@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -22,11 +23,11 @@ class BookingType extends AbstractType
         $booking = $options['data'];
 
         $builder
-            ->add('dateStart', DateFrenchType::class,
+            ->add('dateStart', DateTimeFrenchType::class,
                 [
                     'data' => $booking->getDateStart(),
                 ])
-            ->add('dateEnd', DateFrenchType::class, [
+            ->add('dateEnd', DateTimeFrenchType::class, [
                 'data' => $booking->getDateEnd(),
             ])
             ->add('dogs', EntityType::class, [
@@ -37,6 +38,7 @@ class BookingType extends AbstractType
                     'class' => 'form-control choices-js',
                 ],
                 'data' => $booking->getDogs(),
+                'choice_value' => 'id',
             ])
             ->add('price', IntegerType::class, [
                 'attr' => [
@@ -76,8 +78,12 @@ class BookingType extends AbstractType
             ->add('textColor', ColorType::class, [
                 'data' => $booking->getTextColor() ?? '#000000',
             ])
+            ->add('bookingId', HiddenType::class, [
+                'data' => $booking->getId() ?? null,
+                'mapped' => false,
+            ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Créer',
+                'label' => 'Create',
                 'attr' => [
                     'class' => 'form-control btn btn-primary',
                 ],
