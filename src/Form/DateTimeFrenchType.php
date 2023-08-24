@@ -17,7 +17,7 @@ class DateTimeFrenchType extends AbstractType
             'html5' => false,
             'attr' => [
                 'readonly' => true,
-                'class' => 'form-control datepicker active w-100',
+                'class' => 'form-control datetimepicker active w-100',
             ]
         ]);
     }

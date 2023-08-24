@@ -17,10 +17,10 @@ class Booking
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTime $dateStart = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTime $dateEnd = null;
 
     #[ORM\ManyToMany(targetEntity: Dog::class, inversedBy: 'bookings')]

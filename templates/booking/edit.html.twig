@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Booking{% endblock %}
+
+{% block body %}
+    <h1>Edit Booking</h1>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {{ include('booking/_form.html.twig', {'action': 'edit'}) }}
+{% endblock %}

@@ -1,0 +1,50 @@
+<form method="POST" class="bookingForm" data-booking="{{ bookingSerialized|json_encode() }}">
+    {{ form_row(form._token) }}
+    <div class="modal-body container">
+        <div class="row">
+            <div class="col-6 mb-4">
+                {{ form_row(form.dateStart) }}
+            </div>
+            <div class="col-6 mb-4">
+                {{ form_row(form.dateEnd) }}
+            </div>
+            <div class="col-6 mb-4">
+                {{ form_row(form.dogs) }}
+            </div>
+            <div class="col-4 mb-4">
+                {{ form_row(form.price) }}
+            </div>
+            <div class="col-2  mb-4 form-check form-switch d-flex align-items-end justify-content-center">
+                {{ form_row(form.declared) }}
+            </div>
+            <div class="col-12 mb-4">
+                {{ form_row(form.inventory) }}
+            </div>
+            <div class="col-12 mb-4">
+                {{ form_row(form.comment) }}
+            </div>
+            <div class="col-6 mb-4">
+                {{ form_row(form.backgroundColor) }}
+            </div>
+            <div class="col-6 mb-4">
+                {{ form_row(form.textColor) }}
+            </div>
+        </div>
+    </div>
+    <button class="action-button d-none"></button>
+</form>
+
+
+<div class="d-flex justify-content-between mt-4 mb-4">
+    <div class="d-flex">
+        <a href="{{ path('bookings') }}" class="btn btn-light">back to list</a>
+        {% if action == "edit" %}
+            {{ include('booking/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+    {% if action == "create" %}
+        <button class="btn btn-primary action-button-click">Create</button>
+    {% else %}
+        <button class="btn btn-primary action-button-click">Edit</button>
+    {% endif %}
+</div>

@@ -34,7 +34,7 @@ class DogController extends AbstractController
             return $this->redirectToRoute('dog_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('dog/new.html.twig', [
+        return $this->render('dog/new.html.twig', [
             'dog' => $dog,
             'form' => $form,
         ]);
@@ -60,7 +60,7 @@ class DogController extends AbstractController
             return $this->redirectToRoute('dog_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('dog/edit.html.twig', [
+        return $this->render('dog/edit.html.twig', [
             'dog' => $dog,
             'form' => $form,
         ]);

@@ -23,13 +23,12 @@ class BookingType extends AbstractType
         $booking = $options['data'];
 
         $builder
-            ->add('dateStart', DateFrenchType::class,
+            ->add('dateStart', DateTimeFrenchType::class,
                 [
                     'data' => $booking->getDateStart(),
                 ])
-            ->add('dateEnd', DateFrenchType::class, [
+            ->add('dateEnd', DateTimeFrenchType::class, [
                 'data' => $booking->getDateEnd(),
-//                'label' => 'Date end (date + 1 day)',
             ])
             ->add('dogs', EntityType::class, [
                 'required' => false,
@@ -74,21 +73,24 @@ class BookingType extends AbstractType
             ->add('backgroundColor', ColorType::class,
                 [
                     'data' => $booking->getBackgroundColor() ?? '#24A39B',
+                    'attr' => [
+                        'class' => 'form-control',
+                    ],
                 ]
             )
             ->add('textColor', ColorType::class, [
                 'data' => $booking->getTextColor() ?? '#FFFFFF',
-            ])
-            ->add('bookingId', HiddenType::class, [
-                'data' => $booking->getId() ?? null,
-                'mapped' => false,
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Create',
                 'attr' => [
-                    'class' => 'form-control btn btn-primary',
+                    'class' => 'form-control',
                 ],
-            ]);
+            ])
+//            ->add('submit', SubmitType::class, [
+//                'label' => 'Create',
+//                'attr' => [
+//                    'class' => 'form-control btn btn-primary',
+//                ],
+//            ])
+;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

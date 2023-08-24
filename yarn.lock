@@ -920,6 +920,11 @@
   resolved "https://registry.yarnpkg.com/@eonasdan/tempus-dominus/-/tempus-dominus-6.7.13.tgz#50026d8ff2a74286a8041a2ca0433a9dafa31065"
   integrity sha512-1saI7S0WM6jVE+799KjwsVwcDgrde4SUwmR9AofWGi+yq6w4j6TfVCF9rss+pMXTjSnApY17Nd70260pdm3LTA==
 
+"@fortawesome/fontawesome-free@^6.4.2":
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-6.4.2.tgz#36b6a9cb5ffbecdf89815c94d0c0ffa489ac5ecb"
+  integrity sha512-m5cPn3e2+FDCOgi1mz0RexTUvvQibBebOUlUlW0+YrMjDTPkiJ6VTKukA1GRsvRw+12KyJndNjj0O4AgTxm2Pg==
+
 "@fullcalendar/core@^6.1.5":
   version "6.1.5"
   resolved "https://registry.yarnpkg.com/@fullcalendar/core/-/core-6.1.5.tgz#b2ec855f3144ca995af8e5b783a15002d73870fb"

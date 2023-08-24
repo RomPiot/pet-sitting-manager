@@ -3,11 +3,21 @@
 @import "choices.js/public/assets/styles/choices.css";
 @import "@eonasdan/tempus-dominus/src/scss/tempus-dominus.scss";
 
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/v4-shims";
+
 .modal-dialog {
     max-width: 80% !important;
 }
 
 .choices__list {
     z-index: 3 !important;
+}
+
+label {
+    margin-bottom: 5px;
 }
 
