@@ -23,12 +23,13 @@ class BookingType extends AbstractType
         $booking = $options['data'];
 
         $builder
-            ->add('dateStart', DateTimeFrenchType::class,
+            ->add('dateStart', DateFrenchType::class,
                 [
                     'data' => $booking->getDateStart(),
                 ])
-            ->add('dateEnd', DateTimeFrenchType::class, [
+            ->add('dateEnd', DateFrenchType::class, [
                 'data' => $booking->getDateEnd(),
+//                'label' => 'Date end (date + 1 day)',
             ])
             ->add('dogs', EntityType::class, [
                 'required' => false,
@@ -72,11 +73,11 @@ class BookingType extends AbstractType
             ])
             ->add('backgroundColor', ColorType::class,
                 [
-                    'data' => $booking->getBackgroundColor() ?? '#ffffff',
+                    'data' => $booking->getBackgroundColor() ?? '#24A39B',
                 ]
             )
             ->add('textColor', ColorType::class, [
-                'data' => $booking->getTextColor() ?? '#000000',
+                'data' => $booking->getTextColor() ?? '#FFFFFF',
             ])
             ->add('bookingId', HiddenType::class, [
                 'data' => $booking->getId() ?? null,

@@ -3,6 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import {Modal} from 'bootstrap';
 import Choices from "choices.js";
+import TinyMCE from "./tiny_mce";
 
 function updateBookingDate(info) {
     const start = info.event.startStr;
@@ -50,6 +51,7 @@ export default function () {
                     // listPlugin,
                     interactionPlugin
                 ],
+                displayEventTime: false,
                 defaultAllDay: false,
                 selectable: true,
                 editable: true,
@@ -153,7 +155,6 @@ export default function () {
                     const choicesJsElements = document.querySelectorAll('.choices-js');
 
                     const dogIdsToSelect = booking.dogs.map(dog => dog.id);
-                    console.log(dogIdsToSelect);
 
                     if (choicesJsElements) {
                         choicesJsElements.forEach(function (choiceJsElement) {
