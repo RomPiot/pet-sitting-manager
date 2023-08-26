@@ -34,23 +34,56 @@ class ProfitsController extends AbstractController
 
             $bookings = $bookingRepository->findByDateRange($dateStart, $dateEnd);
         }
-        $profits = $bookingService->calculateProfits($bookings);
-        $profitsDeclared = $bookingService->calculateProfitsDeclared($bookings);
-        $profitsUndeclared = $bookingService->calculateProfitsUndeclared($bookings);
 
-        $profitsDeclaredInt =$bookingService->calculateProfitsDeclared($bookings, false);
-        $profitsUndeclaredInt =$bookingService->calculateProfitsUndeclared($bookings, false);
+        // total profits
+        $totalProfits = $bookingService->calculateProfits($bookings, 'total');
+        $totalProfitsDeclared = $bookingService->calculateProfitsDeclared($bookings);
+        $totalProfitsUndeclared = $bookingService->calculateProfitsUndeclared($bookings);
+
+        $totalProfitsDeclaredInt =$bookingService->calculateProfitsDeclared($bookings, false);
+        $totalProfitsUndeclaredInt =$bookingService->calculateProfitsUndeclared($bookings, false);
+
+        // current profits
+        $currentProfits = $bookingService->calculateProfits($bookings, 'current');
+        $currentProfitsDeclared = $bookingService->calculateProfitsDeclared($bookings);
+        $currentProfitsUndeclared = $bookingService->calculateProfitsUndeclared($bookings);
+
+        $currentProfitsDeclaredInt =$bookingService->calculateProfitsDeclared($bookings, false);
+        $currentProfitsUndeclaredInt =$bookingService->calculateProfitsUndeclared($bookings, false);
+
+        // coming profits
+        $comingProfits = $bookingService->calculateProfits($bookings, 'coming');
+        $comingProfitsDeclared = $bookingService->calculateProfitsDeclared($bookings);
+        $comingProfitsUndeclared = $bookingService->calculateProfitsUndeclared($bookings);
+
+        $comingProfitsDeclaredInt =$bookingService->calculateProfitsDeclared($bookings, false);
+        $comingProfitsUndeclaredInt =$bookingService->calculateProfitsUndeclared($bookings, false);
 
         return $this->render('profits/index.html.twig', [
-            'bookings' => $bookings,
-            'profits' => $profits,
-            'profitsDeclared' => $profitsDeclared,
-            'profitsDeclaredInt' => $profitsDeclaredInt,
-            'profitsUndeclared' => $profitsUndeclared,
-            'profitsUndeclaredInt' => $profitsUndeclaredInt,
             'filterBookingsForm' => $filterBookingsForm->createView(),
             'dateStart' => $dateStart,
             'dateEnd' => $dateEnd,
+
+            'bookings' => $bookings,
+
+            'totalProfits' => $totalProfits,
+            'totalProfitsDeclared' => $totalProfitsDeclared,
+            'totalProfitsDeclaredInt' => $totalProfitsDeclaredInt,
+            'totalProfitsUndeclared' => $totalProfitsUndeclared,
+            'totalProfitsUndeclaredInt' => $totalProfitsUndeclaredInt,
+
+            'currentProfits' => $currentProfits,
+            'currentProfitsDeclared' => $currentProfitsDeclared,
+            'currentProfitsDeclaredInt' => $currentProfitsDeclaredInt,
+            'currentProfitsUndeclared' => $currentProfitsUndeclared,
+            'currentProfitsUndeclaredInt' => $currentProfitsUndeclaredInt,
+
+            'comingProfits' => $comingProfits,
+            'comingProfitsDeclared' => $comingProfitsDeclared,
+            'comingProfitsDeclaredInt' => $comingProfitsDeclaredInt,
+            'comingProfitsUndeclared' => $comingProfitsUndeclared,
+            'comingProfitsUndeclaredInt' => $comingProfitsUndeclaredInt,
+
         ]);
     }
 }

@@ -1,78 +1,80 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="{{ path('bookings') }}">Pet Sitting</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="d-flex justify-content-between w-100">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link
+<div class="sidebar d-flex flex-column justify-content-between mb-5">
+    <div class="mt-4">
+    <a class="navbar-brand" href="{{ path('bookings') }}">Pet Sitting</a>
+    <ul class="navbar-nav mt-4">
+        <li class="nav-item">
+            <a class="nav-link
                          {% if app.request.attributes.get('_route') in [
-                            'bookings',
-                            'booking_new',
-                            'booking_new_from_dates',
-                            'booking_edit_dates',
-                            'booking_create',
-                            'booking_edit',
-                        ] %} active{% endif %}"
-                           href="{{ path('bookings') }}">Réservations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link
+                'dashboard',
+            ] %} active{% endif %}"
+               href="{{ path('dashboard') }}"><i class="width-20 fa-solid fa-chart-line"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link
                          {% if app.request.attributes.get('_route') in [
-                            'dog_list',
-                            'dog_new',
-                            'dog_create',
-                            'dog_edit',
-                            'dog_delete',
-                            'dog_show'
-                        ] %} active{% endif %}"
-                           href="{{ path('dog_list') }}">Chiens</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link
+                'bookings',
+                'booking_new',
+                'booking_new_from_dates',
+                'booking_edit_dates',
+                'booking_create',
+                'booking_edit',
+            ] %} active{% endif %}"
+               href="{{ path('bookings') }}"><i class="width-20 fa-solid fa-calendar-days"></i> Réservations</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link
+                         {% if app.request.attributes.get('_route') in [
+                'dog_list',
+                'dog_new',
+                'dog_create',
+                'dog_edit',
+                'dog_delete',
+                'dog_show'
+            ] %} active{% endif %}"
+               href="{{ path('dog_list') }}"><i class="width-20 fa-solid fa-dog"></i> Chiens</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link
                             {% if app.request.attributes.get('_route') in [
-                            'owner_list',
-                            'owner_new',
-                            'owner_create',
-                            'owner_edit',
-                            'owner_delete',
-                            'owner_show'
-                        ] %} active{% endif %}"
-                           href="{{ path('owner_list') }}">Propriétaires</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link
+                'owner_list',
+                'owner_new',
+                'owner_create',
+                'owner_edit',
+                'owner_delete',
+                'owner_show'
+            ] %} active{% endif %}"
+               href="{{ path('owner_list') }}"><i class="width-20 fa-solid fa-person"></i> Propriétaires</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link
                          {% if app.request.attributes.get('_route') in [
-                            'profits',
-                        ] %} active{% endif %}"
-                           href="{{ path('profits') }}">Gains</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-                        {% else %}
-                            <div class="d-flex">
-{#                                <a class="nav-link#}
-{#                                 {% if app.request.attributes.get('_route') in [#}
-{#                                    'app_register',#}
-{#                                ] %} active{% endif %}"#}
-{#                                   href="{{ path('app_register') }}">Inscription</a>#}
-                                <a class="nav-link
-                                 {% if app.request.attributes.get('_route') in [
-                                    'app_login',
-                                ] %} active{% endif %}"
-                                   href="{{ path('app_login') }}">Connexion</a>
-                            </div>
-                        {% endif %}
-                    </li>
-                </ul>
-            </div>
-        </div>
+                'profits',
+            ] %} active{% endif %}"
+               href="{{ path('profits') }}"><i class="width-20 fa-solid fa-dollar-sign"></i> Gains</a>
+        </li>
+    </ul>
     </div>
-</nav>
+    <div>
+
+        <ul class="navbar-nav mb-4">
+            <li class="nav-item">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a class="nav-link" href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
+                {% else %}
+                    <div class="d-flex">
+                        <a class="nav-link
+                                 {% if app.request.attributes.get('_route') in [
+                            'app_register',
+                        ] %} active{% endif %}"
+                           href="{{ path('app_register') }}"><i class="fa-regular fa-user"></i> Inscription</a>
+                        <a class="nav-link
+                                 {% if app.request.attributes.get('_route') in [
+                            'app_login',
+                        ] %} active{% endif %}"
+                           href="{{ path('app_login') }}"><i class="fa-solid fa-user"></i> Connexion</a>
+                    </div>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</div>

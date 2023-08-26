@@ -64,20 +64,29 @@
                     <tbody>
                     <tr>
                         <th>Total des gains</th>
-                        <td>{{ profits }}</td>
+                        <td>{{ totalProfits }}</td>
+                    </tr>
+                    <tr>
+                        <th>En cours ou terminé</th>
+                        <td>{{ currentProfits }}</td>
+                    </tr>
+                    <tr>
+                        <th>En cours ou terminé</th>
+                        <td>{{ comingProfits }}</td>
                     </tr>
                     <tr>
                         <th>Gains déclarés</th>
-                        <td>{{ profitsDeclared }}</td>
+                        <td>{{ totalProfitsDeclared }}</td>
                     </tr>
                     <tr>
                         <th>Gains non déclarés</th>
-                        <td>{{ profitsUndeclared }}</td>
+                        <td>{{ totalProfitsUndeclared }}</td>
                     </tr>
+
                     </tbody>
                 </table>
             </div>
-            <canvas id="profitChart" width="600" height="400" data-declared="{{ profitsDeclaredInt }}" data-undeclared="{{ profitsUndeclaredInt }}"></canvas>
+            <canvas id="profitChart" width="600" height="400" data-declared="{{ totalProfitsDeclaredInt }}" data-undeclared="{{ totalProfitsUndeclaredInt }}"></canvas>
         </div>
     </div>
 {% endblock %}

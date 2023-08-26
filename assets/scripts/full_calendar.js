@@ -33,6 +33,7 @@ export default function () {
                 ],
                 // displayEventTime: false,
                 // defaultAllDay: false,
+                firstDay: 1,
                 selectable: true,
                 editable: true,
                 initialView: 'dayGridMonth',

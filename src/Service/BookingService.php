@@ -2,19 +2,38 @@
 
 namespace App\Service;
 
+use App\Entity\Booking;
+use DateTime;
+
 class BookingService
 {
-    public function calculateProfits(array $bookings): string
+    /**
+     * @param Booking[] $bookings
+     * @param string $type
+     * @return string
+     */
+    public function calculateProfits(array $bookings, string $type = 'total'): string
     {
         $profits = 0;
         foreach ($bookings as $booking) {
-            $profits += $booking->getPrice();
+
+            if ($type == 'total') {
+                $profits += $booking->getPrice();
+            } elseif ($type == 'current') {
+                if ($booking->getDateStart() <= new DateTime()) {
+                    $profits += $booking->getPrice();
+                }
+            } elseif ($type == 'coming') {
+                if ($booking->getDateStart() > new DateTime()) {
+                    $profits += $booking->getPrice();
+                }
+            }
         }
 
         return $this->convertIntToEuros($profits);
     }
 
-    public function calculateProfitsDeclared(array $bookings, bool$convertInEuros = true): string
+    public function calculateProfitsDeclared(array $bookings, bool $convertInEuros = true): string
     {
         $profits = 0;
         foreach ($bookings as $booking) {

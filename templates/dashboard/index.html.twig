@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <h6 class="m-b-20">Moyenne de gain par mois</h6>
+                            <div class="col-9">
+                                <div class="d-flex align-items-center align-self-start">
+                                    <h3 class="mb-0">$12.34</h3>
+                                    <p class="text-danger ml-2 mb-0 font-weight-medium">-2.4%</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="icon icon-box-danger">
+                                    <span class="mdi mdi-arrow-bottom-left icon-item"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Daily Income</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <h6 class="m-b-20">Moyenne de gain par mois</h6>
+                            <div class="col-9">
+                                <div class="d-flex align-items-center align-self-start">
+                                    <h3 class="mb-0">$12.34</h3>
+                                    <p class="text-danger ml-2 mb-0 font-weight-medium">-2.4%</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="icon icon-box-danger">
+                                    <span class="mdi mdi-arrow-bottom-left icon-item"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Daily Income</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <h6 class="m-b-20">Moyenne de gain par mois</h6>
+                            <div class="col-9">
+                                <div class="d-flex align-items-center align-self-start">
+                                    <h3 class="mb-0">$12.34</h3>
+                                    <p class="text-danger ml-2 mb-0 font-weight-medium">-2.4%</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="icon icon-box-danger">
+                                    <span class="mdi mdi-arrow-bottom-left icon-item"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Daily Income</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <h6 class="m-b-20">Moyenne de gain par mois</h6>
+                            <div class="col-9">
+                                <div class="d-flex align-items-center align-self-start">
+                                    <h3 class="mb-0">$12.34</h3>
+                                    <p class="text-danger ml-2 mb-0 font-weight-medium">-2.4%</p>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="icon icon-box-danger">
+                                    <span class="mdi mdi-arrow-bottom-left icon-item"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Daily Income</h6>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <canvas id="view-per-month"></canvas>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-primary text-white order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Total des gains</h6>
+                        <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>486</span></h2>
+                        <p class="m-b-0">Nombre de gardes<span class="f-right">12</span></p>
+                    </div>
+                </div>
+                <canvas id="profitChart" width="600" height="400" data-declared="{{ profitsDeclaredInt }}"
+                        data-undeclared="{{ profitsUndeclaredInt }}"></canvas>
+            </div>
+        </div>
+    </div>
+{% endblock %}
