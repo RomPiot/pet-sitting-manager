@@ -63,6 +63,13 @@ class DogType extends AbstractType
                 ],
                 'label' => 'Alimentation',
             ])
+            ->add('note', TextareaType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control tinymce',
+                ],
+                'label' => 'Note',
+            ])
         ;
     }
 

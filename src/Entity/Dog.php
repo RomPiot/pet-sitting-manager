@@ -41,6 +41,9 @@ class Dog
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $textColor = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $note = null;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -163,6 +166,18 @@ class Dog
     public function setTextColor(string $textColor): self
     {
         $this->textColor = $textColor;
+
+        return $this;
+    }
+
+    public function getNote(): ?string
+    {
+        return $this->note;
+    }
+
+    public function setNote(?string $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }
