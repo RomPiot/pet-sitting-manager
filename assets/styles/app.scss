@@ -21,3 +21,12 @@ label {
     margin-bottom: 5px;
 }
 
+.form-control, .tox-tinymce {
+    margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: calc(100% - 10px);
+    }
+}
