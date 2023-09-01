@@ -62,11 +62,11 @@
                     <a class="nav-link" href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
                 {% else %}
                     <div class="d-flex">
-                        <a class="nav-link
-                                 {% if app.request.attributes.get('_route') in [
-                            'app_register',
-                        ] %} active{% endif %}"
-                           href="{{ path('app_register') }}"><i class="fa-regular fa-user"></i> Inscription</a>
+{#                        <a class="nav-link#}
+{#                                 {% if app.request.attributes.get('_route') in [#}
+{#                            'app_register',#}
+{#                        ] %} active{% endif %}"#}
+{#                           href="{{ path('app_register') }}"><i class="fa-regular fa-user"></i> Inscription</a>#}
                         <a class="nav-link
                                  {% if app.request.attributes.get('_route') in [
                             'app_login',

@@ -49,6 +49,10 @@ class DogType extends AbstractType
                 'required' => false,
                 'label' => 'Date de naissance',
             ])
+            ->add('deathDate', DateFrenchType::class, [
+                'required' => false,
+                'label' => 'Date de décès',
+            ])
             ->add('breed', TextType::class, [
                 'required' => false,
                 'attr' => [

@@ -43,21 +43,34 @@ export default function () {
         const viewPerMonthChart = document.getElementById('view-per-month');
 
         if (viewPerMonthChart) {
+            const profitsDeclaredPerMonth = JSON.parse(viewPerMonthChart.dataset.profitsDeclaredPerMonth);
+            const profitsUndeclaredPerMonth = JSON.parse(viewPerMonthChart.dataset.profitsUndeclaredPerMonth);
+
+            let profitsUndeclaredPerMonthData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            let profitsDeclaredPerMonthData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+            for (const [key, value] of Object.entries(profitsUndeclaredPerMonth)) {
+                profitsUndeclaredPerMonthData[key - 1] = value;
+            }
+
+            for (const [key, value] of Object.entries(profitsDeclaredPerMonth)) {
+                profitsDeclaredPerMonthData[key - 1] = value;
+            }
+
             const labels = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
             const data = {
                 labels: labels,
                 datasets: [{
                     label: 'Déclaré',
-                    data: [26, 59, 80, 81, 56, 55, 40, 26, 59, 80, 81, 56],
+                    data: profitsDeclaredPerMonthData,
                     borderWidth: 1
                 },
-                {
-                    label: 'Non déclaré',
-                    data: [26, 59, 80, 81, 56, 55, 40, 26, 59, 80, 81, 56],
-                }
+                    {
+                        label: 'Non déclaré',
+                        data: profitsUndeclaredPerMonthData,
+                    }
                 ]
             };
-
 
 
             new Chart(viewPerMonthChart, {

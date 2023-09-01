@@ -70,4 +70,40 @@ class BookingService
         $profits = floatval($profits);
         return number_format(floatval($profits), 0, ',', ' ') . ' €';
     }
+
+    /**
+     * @param Booking[] $bookings
+     * @return string[]
+     */
+    public function calculateProfitsDeclaredPerMonth(array $bookings): array
+    {
+        $profits = [];
+        foreach ($bookings as $booking) {
+            if ($booking->isDeclared()) {
+                $month = (int)$booking->getDateStart()->format('m');
+                $profits[$month] = $profits[$month] ?? 0;
+                $profits[$month] += $booking->getPrice();
+            }
+        }
+
+        return $profits;
+    }
+
+    /**
+     * @param Booking[] $bookings
+     * @return string[]
+     */
+    public function calculateProfitsUndeclaredPerMonth(array $bookings): array
+    {
+        $profits = [];
+        foreach ($bookings as $booking) {
+            if (!$booking->isDeclared()) {
+                $month = (int)$booking->getDateStart()->format('m');
+                $profits[$month] = $profits[$month] ?? 0;
+                $profits[$month] += $booking->getPrice();
+            }
+        }
+
+        return $profits;
+    }
 }

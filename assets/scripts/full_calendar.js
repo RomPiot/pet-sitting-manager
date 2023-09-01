@@ -31,8 +31,9 @@ export default function () {
                     listPlugin,
                     interactionPlugin
                 ],
-                // displayEventTime: false,
-                // defaultAllDay: false,
+                eventResizableFromStart: true,
+                displayEventTime: true,
+                // defaultAllDay: false, // true if you want to resize allDay events
                 firstDay: 1,
                 selectable: true,
                 editable: true,

@@ -3,12 +3,12 @@
     "app": {
       "js": [
         "/build/runtime.9aee0f8a.js",
-        "/build/818.7253965d.js",
-        "/build/app.a738cde6.js"
+        "/build/528.78f25ed8.js",
+        "/build/app.7900c163.js"
       ],
       "css": [
-        "/build/818.a7b01a91.css",
-        "/build/app.acb15102.css"
+        "/build/528.a7b01a91.css",
+        "/build/app.d175b6e7.css"
       ]
     }
   }

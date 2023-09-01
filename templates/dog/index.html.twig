@@ -15,7 +15,7 @@
         <tr>
             <th>Nom</th>
             <th>Race</th>
-            <th>Date de naissance</th>
+            <th>Age</th>
             <th>Propriétaire</th>
             <th>Actions</th>
         </tr>
@@ -25,7 +25,7 @@
             <tr>
                 <td>{{ dog.name }}</td>
                 <td>{{ dog.breed }}</td>
-                <td>{{ dog.birthday ? dog.birthday|date('Y-m-d') : '' }}</td>
+                <td>{{ dog.age != null ? dog.age : '' }}</td>
                 <td>{% if dog.owner %}<a href="{{ path('owner_show', {id: dog.owner.id}) }}">{{ dog.owner.name }}</a>{% endif %}</td>
                 <td>
                     <a href="{{ path('dog_show', {'id': dog.id}) }}">Voir</a>

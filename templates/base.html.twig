@@ -3,7 +3,7 @@
 {% include '_partials/_head.html.twig' %}
 <body class="d-flex">
 {% include '_partials/_navigation.html.twig' %}
-<div class="main container mt-4">
+<div class="main {% block containerClass %}mt-4 container{% endblock %}">
     {% block body %}{% endblock %}
 </div>
 </body>

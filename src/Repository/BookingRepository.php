@@ -84,7 +84,7 @@ class BookingRepository extends ServiceEntityRepository
      * @param array<Dog> $dogs
      * @return void
      */
-    public function findByFilterBookinksForm(DateTime $dateStart, DateTime $dateEnd, bool $isDeclared, ArrayCollection $dogs): ?array
+    public function filterBookingsForm(DateTime $dateStart, DateTime $dateEnd, bool $isDeclared, ArrayCollection $dogs): ?array
     {
         $queryBuilder = $this->createQueryBuilder('b')
             ->andWhere('b.dateStart >= :dateStart')

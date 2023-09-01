@@ -44,6 +44,9 @@ class Dog
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $note = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $deathDate = null;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -180,5 +183,33 @@ class Dog
         $this->note = $note;
 
         return $this;
+    }
+
+    public function getDeathDate(): ?\DateTimeInterface
+    {
+        return $this->deathDate;
+    }
+
+    public function setDeathDate(?\DateTimeInterface $deathDate): self
+    {
+        $this->deathDate = $deathDate;
+
+        return $this;
+    }
+
+    public function getAge(): ?string
+    {
+        if (!$this->getBirthday()) {
+            return null;
+        }
+
+        if ($this->getDeathDate()) {
+            $interval = $this->getDeathDate()->diff($this->getBirthday());
+        } else {
+            $now = new DateTime();
+            $interval = $now->diff($this->getBirthday());
+        }
+
+        return $interval->y . ' ans et ' . $interval->m . ' mois';
     }
 }

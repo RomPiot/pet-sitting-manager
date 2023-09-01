@@ -2,14 +2,35 @@
 
 {% block title %}Dashboard{% endblock %}
 
+{% block containerClass %}container-fluid p-0{% endblock %}
+
 {% block body %}
+    <div class="dashboard-filter-bar" data-date-start="{{ dateStart|date('d-m-Y') }}"
+         data-date-end="{{ dateEnd|date('d-m-Y') }}">
+            {{ form_start(filterDashboardForm) }}
+            <div class="row mb-4 w-100">
+                <div class="col-2 d-flex align-items-center">
+                    {{ form_label(filterDashboardForm.dateStart) }}
+                    {{ form_widget(filterDashboardForm.dateStart) }}
+                </div>
+                <div class="col-2 d-flex align-items-center">
+                    {{ form_label(filterDashboardForm.dateEnd) }}
+                    {{ form_widget(filterDashboardForm.dateEnd) }}
+                </div>
+                <div class="col-2 d-flex align-items-end justify-content-end">
+                    {{ form_row(filterDashboardForm.submit) }}
+                    <a href="" class="btn btn-outline-danger ms-2 form-control">Reset</a>
+                </div>
+            </div>
+            {{ form_end(filterDashboardForm) }}
+    </div>
     <div class="container">
         <div class="row mb-4">
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <h6 class="m-b-20">Moyenne de gain par mois</h6>
+                            <h6 class="m-b-20">Moyenne de gain mensuel</h6>
                             <div class="col-9">
                                 <div class="d-flex align-items-center align-self-start">
                                     <h3 class="mb-0">{{ averageMonthProfits }}</h3>
@@ -29,20 +50,19 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <h6 class="m-b-20">Moyenne de gain par mois</h6>
+                            <h6 class="m-b-20">Gains totaux</h6>
                             <div class="col-9">
                                 <div class="d-flex align-items-center align-self-start">
-                                    <h3 class="mb-0">$12.34</h3>
-                                    <p class="text-danger ml-2 mb-0 font-weight-medium">-2.4%</p>
+                                    <h3 class="mb-0">{{ totalProfits }}</h3>
+
+                                    {#                                    <p class="text-danger ml-2 mb-0 font-weight-medium">-2.4%</p>#}
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <div class="icon icon-box-danger">
-                                    <span class="mdi mdi-arrow-bottom-left icon-item"></span>
-                                </div>
-                            </div>
+                            {#                            <div class="col-3">#}
+                            {#                                <i class="fa-solid fa-arrow-down"></i>#}
+                            {#                            </div>#}
                         </div>
-                        <h6 class="text-muted font-weight-normal">Daily Income</h6>
+                        {#                        <h6 class="text-muted font-weight-normal">Daily Income</h6>#}
                     </div>
                 </div>
             </div>
@@ -50,7 +70,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <h6 class="m-b-20">Moyenne de gain par mois</h6>
+                            <h6 class="m-b-20">Coming soon</h6>
                             <div class="col-9">
                                 <div class="d-flex align-items-center align-self-start">
                                     <h3 class="mb-0">$12.34</h3>
@@ -63,7 +83,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h6 class="text-muted font-weight-normal">Daily Income</h6>
+                        <h6 class="text-muted font-weight-normal">Coming soon</h6>
                     </div>
                 </div>
             </div>
@@ -71,7 +91,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <h6 class="m-b-20">Moyenne de gain par mois</h6>
+                            <h6 class="m-b-20">Coming soon</h6>
                             <div class="col-9">
                                 <div class="d-flex align-items-center align-self-start">
                                     <h3 class="mb-0">$12.34</h3>
@@ -84,7 +104,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h6 class="text-muted font-weight-normal">Daily Income</h6>
+                        <h6 class="text-muted font-weight-normal">Coming soon</h6>
                     </div>
                 </div>
             </div>
@@ -92,7 +112,10 @@
         </div>
         <div class="row">
             <div class="col-md-9">
-                <canvas id="view-per-month"></canvas>
+                <canvas id="view-per-month"
+                        data-profits-declared-per-month="{{ profitsDeclaredPerMonth }}"
+                        data-profits-undeclared-per-month="{{ profitsUndeclaredPerMonth }}"
+                ></canvas>
             </div>
             <div class="col-md-3">
                 <div class="card bg-primary text-white order-card">

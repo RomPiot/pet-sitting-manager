@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\FilterDashboardType;
 use App\Repository\BookingRepository;
 use App\Service\BookingService;
 use DateTime;
@@ -17,23 +18,21 @@ class DashboardController extends AbstractController
     {
         $dateStart = new DateTime('first day of January');
         $dateEnd = new DateTime('last day of December');
+
+        $filterDashboardForm = $this->createForm(FilterDashboardType::class);
+        $filterDashboardForm->handleRequest($request);
+
+        if ($filterDashboardForm->isSubmitted() && $filterDashboardForm->isValid()) {
+            $data = $filterDashboardForm->getData();
+            $dateStart = $data['dateStart'] ?? $dateStart;
+            $dateEnd = $data['dateEnd'] ?? $dateEnd;
+        }
+
         $bookings = $bookingRepository->findByDateRange($dateStart, $dateEnd);
 
-        $profits = $bookingService->calculateProfits($bookings);
+        $totalProfits = $bookingService->calculateProfits($bookings);
 
-        // count all days from 1 january to today
         $dayCount = (int) (new DateTime())->diff($dateStart)->format('%a');
-
-//        $profitsPerMonth = [];
-//        for ($i = 1; $i <= $monthCount; $i++) {
-//            $dateStart = new DateTime("first day of January + $i month");
-//            $dateEnd = new DateTime("last day of January + $i month");
-//            $profitsPerMonth[] = [
-//                'month' => $dateStart->format('F'),
-//                'profits' => $bookingService->calculateProfits($bookingRepository->findByDateRange($dateStart, $dateEnd)),
-//            ];
-//        }
-
 
         $profitsDeclared = $bookingService->calculateProfitsDeclared($bookings);
         $profitsUndeclared = $bookingService->calculateProfitsUndeclared($bookings);
@@ -43,17 +42,26 @@ class DashboardController extends AbstractController
         $totalProfitsInt = $profitsUndeclaredInt + $profitsDeclaredInt;
 
         $averageMonthProfits = $totalProfitsInt / $dayCount * 30;
-        // convert to euros
         $averageMonthProfits = $bookingService->convertIntToEuros($averageMonthProfits);
 
+        $profitsDeclaredPerMonth = $bookingService->calculateProfitsDeclaredPerMonth($bookings);
+        $profitsUndeclaredPerMonth = $bookingService->calculateProfitsUndeclaredPerMonth($bookings);
+
+        $profitsDeclaredPerMonth = json_encode($profitsDeclaredPerMonth);
+        $profitsUndeclaredPerMonth = json_encode($profitsUndeclaredPerMonth);
 
         return $this->render('dashboard/index.html.twig', [
             'profitsDeclared' => $profitsDeclared,
             'profitsDeclaredInt' => $profitsDeclaredInt,
             'profitsUndeclared' => $profitsUndeclared,
             'profitsUndeclaredInt' => $profitsUndeclaredInt,
-            'totalProfits' => $totalProfitsInt,
+            'totalProfits' => $totalProfits,
             'averageMonthProfits' => $averageMonthProfits,
+            'profitsDeclaredPerMonth' => $profitsDeclaredPerMonth,
+            'profitsUndeclaredPerMonth' => $profitsUndeclaredPerMonth,
+            'filterDashboardForm' => $filterDashboardForm->createView(),
+            'dateStart' => $dateStart,
+            'dateEnd' => $dateEnd,
         ]);
     }
 }

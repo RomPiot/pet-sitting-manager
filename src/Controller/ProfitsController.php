@@ -29,7 +29,7 @@ class ProfitsController extends AbstractController
             $isDeclared = $data['declared'] ?? false;
             $dogs = $data['dogs'];
 
-            $bookings = $bookingRepository->findByFilterBookinksForm($dateStart, $dateEnd, $isDeclared, $dogs);
+            $bookings = $bookingRepository->filterBookingsForm($dateStart, $dateEnd, $isDeclared, $dogs);
         } else {
 
             $bookings = $bookingRepository->findByDateRange($dateStart, $dateEnd);
